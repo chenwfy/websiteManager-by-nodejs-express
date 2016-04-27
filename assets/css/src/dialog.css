@@ -1,0 +1,323 @@
+﻿/*
+=====================================================================================
+通用弹层对话框样式
+=====================================================================================
+*/
+.dlayer-layer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+    .dlayer-layer > .wapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 400px;
+        height: 300px;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+        /* 标题和控制按钮栏 */
+        .dlayer-layer > .wapper > .title {
+            position: relative;
+            height: 39px;
+            text-align: left;
+            -moz-border-radius: 2px 2px 0 0;
+            -webkit-border-radius: 2px 2px 0 0;
+            border-radius: 2px 2px 0 0;
+            background: -moz-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f0f0));
+            background: -webkit-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: -o-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            border-bottom: 1px solid #c7c7c7;
+            box-shadow: 0 1px 0 #fff;
+            cursor: move;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+            .dlayer-layer > .wapper > .title > h1 {
+                width: auto;
+                height: 100%;
+                margin-right: 70px;
+                padding: 0 10px;
+                line-height: 40px;
+                text-align: left;
+                color: #666;
+                font-size: 14px;
+                font-family: 'Microsoft YaHei';
+                font-weight: 500;
+                cursor: move;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .dlayer-layer > .wapper > .title > p {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 70px;
+                height: 100%;
+            }
+
+                .dlayer-layer > .wapper > .title > p > a {
+                    float: right;
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    margin-top: 9px;
+                    margin-right: 10px;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+
+                    .dlayer-layer > .wapper > .title > p > a.minSize {
+                        background-image: url(/assets/images/dialog/icon_min_01.png);
+                    }
+
+                        .dlayer-layer > .wapper > .title > p > a.minSize:hover {
+                            background-image: url(/assets/images/dialog/icon_min_02.png);
+                        }
+
+                    .dlayer-layer > .wapper > .title > p > a.maxSize {
+                        background-image: url(/assets/images/dialog/icon_max_01.png);
+                    }
+
+                        .dlayer-layer > .wapper > .title > p > a.maxSize:hover {
+                            background-image: url(/assets/images/dialog/icon_max_02.png);
+                        }
+
+                    .dlayer-layer > .wapper > .title > p > a.close {
+                        background-image: url(/assets/images/dialog/icon_close_01.png);
+                    }
+
+                        .dlayer-layer > .wapper > .title > p > a.close:hover {
+                            background-image: url(/assets/images/dialog/icon_close_02.png);
+                        }
+
+        /* 对话内容显示栏 */
+        .dlayer-layer > .wapper > .content {
+            padding: 8px;
+            height: auto;
+        }
+
+            .dlayer-layer > .wapper > .content > p {
+                float: left;
+                width: 48px;
+                height: 100%;
+                background-position: center center;
+                background-repeat: no-repeat;
+            }
+
+                .dlayer-layer > .wapper > .content > p.alert {
+                    background-image: url(/assets/images/dialog/icon_warning.png);
+                }
+
+                .dlayer-layer > .wapper > .content > p.confirm {
+                    background-image: url(/assets/images/dialog/icon_confirm.png);
+                }
+
+                .dlayer-layer > .wapper > .content > p.error {
+                    background-image: url(/assets/images/dialog/icon_error.png);
+                }
+
+                .dlayer-layer > .wapper > .content > p.right {
+                    background-image: url(/assets/images/dialog/icon_right.png);
+                }
+
+            .dlayer-layer > .wapper > .content > div {
+                margin-left: 48px;
+                display: table;
+                height: 100%;
+            }
+
+                .dlayer-layer > .wapper > .content > div > div {
+                    display: table-cell;
+                    text-align: left;
+                    vertical-align: middle;
+                    line-height: 24px;
+                    color: #666;
+                    font-size: 14px;
+                    font-weight: normal;
+                }
+
+        /* 对话点击按钮栏 */
+        .dlayer-layer > .wapper > .bottom {
+            height: 47px;
+            background: #f5f5f5;
+            border-top: 1px solid #c7c7c7;
+            box-shadow: 0 1px 0 #fff;
+            line-height: 48px;
+        }
+
+
+            .dlayer-layer > .wapper > .bottom > button {
+                display: inline-block;
+                width: auto;
+                min-width: 48px;
+                height: 30px;
+                padding: 0 6px 0 10px;
+                margin-left: 16px;
+                background: -moz-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+                background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f7f7f7));
+                background: -webkit-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+                background: -o-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+                background: linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+                border: 1px solid #d5d5d5;
+                box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+                text-align: center;
+                line-height: 26px;
+                color: #454545;
+                font-size: 14px;
+                font-weight: 500;
+                letter-spacing: 2px;
+                user-select: none;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                cursor: pointer;
+            }
+
+                .dlayer-layer > .wapper > .bottom > button:first-child {
+                    margin-left: 0;
+                }
+
+                .dlayer-layer > .wapper > .bottom > button:hover {
+                    background: #efefef;
+                    color: #333;
+                }
+
+                .dlayer-layer > .wapper > .bottom > button:active {
+                    background: #e7e7e7;
+                    color: #333;
+                }
+
+                .dlayer-layer > .wapper > .bottom > button.blue {
+                    background: -moz-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                    background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#53b8d6), color-stop(100%,#389ebc));
+                    background: -webkit-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                    background: -o-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                    background: linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                    border-color: #389ebc;
+                    color: #ffffff;
+                }
+
+                    .dlayer-layer > .wapper > .bottom > button.blue:hover {
+                        background: #389ebc;
+                    }
+
+                    .dlayer-layer > .wapper > .bottom > button.blue:active {
+                        background: #46abc9;
+                    }
+
+                .dlayer-layer > .wapper > .bottom > button.orange {
+                    background: -moz-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                    background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#d65f4d), color-stop(100%,#c05343));
+                    background: -webkit-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                    background: -o-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                    background: linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                    border-color: #c05343;
+                    color: #ffffff;
+                }
+
+                    .dlayer-layer > .wapper > .bottom > button.orange:hover {
+                        background: #c05343;
+                    }
+
+                    .dlayer-layer > .wapper > .bottom > button.orange:active {
+                        background: #cc5949;
+                    }
+
+                .dlayer-layer > .wapper > .bottom > button.green {
+                    background: -moz-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                    background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#69b076), color-stop(100%,#4ca15b));
+                    background: -webkit-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                    background: -o-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                    background: linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                    border-color: #4ca15b;
+                    color: #ffffff;
+                }
+
+                    .dlayer-layer > .wapper > .bottom > button.green:hover {
+                        background: #4ca15b;
+                    }
+
+                    .dlayer-layer > .wapper > .bottom > button.green:active {
+                        background: #51a351;
+                    }
+
+        /* IFRAME框架 */
+        .dlayer-layer > .wapper > .frame {
+            height: auto;
+            background: #fff;
+        }
+
+            .dlayer-layer > .wapper > .frame > .loading {
+                width: 100%;
+                height: 100%;
+                background: url(/assets/images/dialog/load_02.gif) no-repeat center center;
+            }
+
+            .dlayer-layer > .wapper > .frame > iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                overflow: hidden;
+            }
+
+/* toast */
+.dlayer-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 120px;
+    z-index: 9999999;
+    width: 268px;
+    min-height: 48px;
+    margin-left: -150px;
+    background-color: rgba(0, 0, 0, .9);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    padding: 8px 16px;
+    text-align: center;
+    line-height: 48px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+/* picturePreview */
+.dlayer-picturePreview {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999999;
+    padding: 8px;
+    background: #f7f7f7;
+    border: 1px #ccc solid;
+    text-align: center;
+    overflow: hidden;
+}
+
+    .dlayer-toast img {
+        width: auto;
+        height: auto;        
+        max-width: 100%;
+        max-height: 100%;        
+    }

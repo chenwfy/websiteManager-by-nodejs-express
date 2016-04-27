@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 我的控制台 - 左侧页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/sideMenu.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/src/sideMenu.js"></script>
+    <script type="text/javascript">
+        //页面记载完成后执行
+        $(function () {
+            var levelData = [
+                { menuName: '主体框架（framework.js）', menuIcon: 'icon-Awesome-cubes', url: 'framework.html' },
+                {
+                    menuName: 'UI组件', menuIcon: 'icon-Awesome-cart-plus', childRen: [
+                        {
+                            menuName: '对话框（dialog.js）', childRen: [
+                                { menuName: 'Alert', url: 'dialog_alert.html' },
+                                { menuName: 'Confirm', url: 'dialog_confirm.html' },
+                                { menuName: 'Error / Success', url: 'dialog_message.html' },
+                                { menuName: 'Toast', url: 'dialog_toast.html' },
+                                { menuName: '弹窗', url: 'dialog_openwindow.html' },
+                                { menuName: '选择文件', url: 'dialog_fileview.html' },
+                            ]
+                        },
+                        { menuName: '日期选择（datePicker.js）', url: 'datepciker.html' },
+                        { menuName: '列表（gridView.js）', url: 'gridView.html' },
+                        {
+                            menuName: '菜单（sideMenu.js）', childRen: [
+                                { menuName: '手风琴式菜单', url: 'menu_style1.html' },
+                                { menuName: '树形菜单', url: 'menu_style2.html' }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    menuName: 'jQuery扩展及插件', menuIcon: 'icon-Awesome-file-code-o', childRen: [
+                        { menuName: '拖拽插件（jquery.drag.min.js）' },
+                        { menuName: '常用扩展（common.js）' }
+                    ]
+                }
+            ];
+            var rootRender = $('div.levelRoot > ul');
+            sideMenu.accordion({ menuData: levelData, menuRender: rootRender, menuHandler: levelNodeClickCallback , firstSelected: true });
+            $('div.levelRoot > div.loading').remove();
+        });
+
+        //没有子级菜单的节点点击事件回调函数
+        var levelNodeClickCallback = function () {
+            var data = this;    //当前点击的节点菜单数据，格式:{ id: 31, name: '商品管理', icon: 'icon-leaf', url: 'desktop/right.html' }
+            //直接跳转
+            //window.top.location.href = data.url;
+
+            //右边主框架打开页面 -- 此处需要注意页面相对路径
+            if (data.url && window.top.FWK && window.top.FWK.MainFrameWindow()) {
+                window.top.FWK.MainFrameWindow().location.href = data.url;
+            }
+
+            //主框架中以OpenTab方式打开(次方式，菜单中需要有 leftUrl, mainUrl参数，参考主页面菜单数据格式)
+            //window.top.FWK && window.top.FWK.OpenTab(data);
+
+            //openwindow打开（后续补充）
+        };
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="levelRoot">
+            <ul>                
+            </ul>
+            <div class="loading">加载中，请稍后……</div>
+        </div>
+    </div>
+</body>
+</html>

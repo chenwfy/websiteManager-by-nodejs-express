@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 右侧框架实例页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <link href="/assets/css/dist/datePicker.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/lib/autosize.js"></script>
+    <style type="text/css">
+        h1 {
+            height: 36px;
+            line-height: 36px;
+            padding-left: 10px;
+            text-align: left;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        p {
+            height: auto;
+            line-height: 30px;
+            padding-left: 10px;
+            text-align: left;
+            color: #787878;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+            p > label {
+                color: #666;
+                font-weight: 600;
+            }
+
+            p > code {
+                display: block;
+                background-color: #f4f4f4;
+                padding: 16px;
+                text-align: left;
+                color: #787878;
+            }
+
+                p > code > i {
+                    color: #044f26;
+                    margin-left: 160px;
+                }
+
+            p > textarea {
+                padding: 4px;
+                height: auto;
+                max-height: 600px;
+                background-color: #f7f7f7;
+                overflow-y: visible;
+                text-align: left;
+                line-height: 24px;
+                color: #333;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            autosize(document.querySelectorAll('textarea'));
+        });
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-info-circle"></i>
+                <label>UI组件 - 日期选择器 组件说明</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap">
+        <h1>示例一: 选择日期</h1>
+        <p>
+            <textarea id="txt_jsCode_example_1">
+<!--示例一HTML代码-->
+<!--
+<input class="date-picker" type="text" name="txt_testDate" id="txt_testDate" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+-->
+<!--示例一JS代码-->
+$('#txt_testDate').on('click', function (e) {
+    var options = {
+        elment: $('#txt_testDate'),
+        model: 'picker',
+        rangeMin: '',
+        rangeMax: '',
+        format: 'yyyy-MM-dd HH:mm:ss',
+        pickHandler: null
+    };
+    window.top.datePicker(options, window, e);
+});
+            </textarea>
+            <br>
+            <input class="date-picker" type="text" name="txt_testDate" id="txt_testDate" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+            点击文本框选择日期
+            <script type="text/javascript">
+                $('#txt_testDate').on('click', function (e) {
+                    var options = {
+                        elment: $('#txt_testDate'),
+                        model: 'picker',
+                        rangeMin: '',
+                        rangeMax: '',
+                        format: 'yyyy-MM-dd HH:mm:ss',
+                        pickHandler: null
+                    };
+                    window.top.datePicker(options, window, e);
+                });
+            </script>
+        </p>
+        <h1>示例二: 限定范围的日期选择</h1>
+        <p>
+            <textarea id="txt_jsCode_example_2">
+<!--示例二HTML代码-->
+<!--
+<input class="date-picker" type="text" name="txt_testDate" id="txt_testDate" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+-->
+<!--示例二JS代码-->
+$('#txt_testDate_1').on('click', function (e) {
+    var options = {
+        elment: $('#txt_testDate_1'),
+        model: 'picker',
+        rangeMin: new Date().DateAdd('d', -3).Format('yyyy-MM-dd HH:mm:ss'), //2016-04-22 16:56:45
+        rangeMax: new Date().DateAdd('d', 3).Format('yyyy-MM-dd HH:mm:ss'), //2016-04-28 16:56:45
+        format: 'yyyy-MM-dd HH:mm:ss',
+        pickHandler: null
+    };
+    window.top.datePicker(options, window, e);
+});
+            </textarea>
+            <br>
+            <input class="date-picker" type="text" name="txt_testDate_1" id="txt_testDate_1" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+            点击文本框选择日期
+            <script type="text/javascript">
+                $('#txt_testDate_1').on('click', function (e) {
+                    var options = {
+                        elment: $('#txt_testDate_1'),
+                        model: 'picker',
+                        rangeMin: new Date().DateAdd('d', -3).Format('yyyy-MM-dd HH:mm:ss'), //2016-04-22 16:56:45
+                        rangeMax: new Date().DateAdd('d', 3).Format('yyyy-MM-dd HH:mm:ss'), //2016-04-28 16:56:45
+                        format: 'yyyy-MM-dd HH:mm:ss',
+                        pickHandler: null
+                    };
+                    window.top.datePicker(options, window, e);
+                });
+            </script>
+        </p>
+        <h1>示例三: 双日期选择，互相制约范围</h1>
+        <p>
+            <textarea id="txt_jsCode_example_3">
+<!--示例三HTML代码-->
+<!--
+<input class="date-picker" type="text" name="txt_testDate_min" id="txt_testDate_min" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+-
+<input class="date-picker" type="text" name="txt_testDate_max" id="txt_testDate_max" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+-->
+<!--示例三JS代码-->
+$('#txt_testDate_min').on('click', function (e) {
+    var options = {
+        elment: $('#txt_testDate_min'),
+        model: 'picker',
+        rangeMin: '',
+        rangeMax: $('#txt_testDate_max'),
+        format: 'yyyy-MM-dd HH:mm:ss',
+        pickHandler: null
+    };
+    window.top.datePicker(options, window, e);
+});
+
+$('#txt_testDate_max').on('click', function (e) {
+    var options = {
+        elment: $('#txt_testDate_max'),
+        model: 'picker',
+        rangeMin: $('#txt_testDate_min'),
+        rangeMax: '',
+        format: 'yyyy-MM-dd HH:mm:ss',
+        pickHandler: null
+    };
+    window.top.datePicker(options, window, e);
+});
+            </textarea>
+            <br>
+            <input class="date-picker" type="text" name="txt_testDate_min" id="txt_testDate_min" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+            -
+            <input class="date-picker" type="text" name="txt_testDate_max" id="txt_testDate_max" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+            点击文本框选择日期
+            <script type="text/javascript">
+                $('#txt_testDate_min').on('click', function (e) {
+                    var options = {
+                        elment: $('#txt_testDate_min'),
+                        model: 'picker',
+                        rangeMin: '',
+                        rangeMax: $('#txt_testDate_max'),
+                        format: 'yyyy-MM-dd HH:mm:ss',
+                        pickHandler: null
+                    };
+                    window.top.datePicker(options, window, e);
+                });
+
+                $('#txt_testDate_max').on('click', function (e) {
+                    var options = {
+                        elment: $('#txt_testDate_max'),
+                        model: 'picker',
+                        rangeMin: $('#txt_testDate_min'),
+                        rangeMax: '',
+                        format: 'yyyy-MM-dd HH:mm:ss',
+                        pickHandler: null
+                    };
+                    window.top.datePicker(options, window, e);
+                });
+            </script>
+        </p>
+        <h1>示例四: render模式 - 此模式，当前页面需要引入“datepicker.css”文件</h1>
+        <p>
+            <textarea id="txt_jsCode_example_4">
+var options = {
+    elment: $('#div_dateRenedr'),
+    model: 'render',
+    rangeMin: '',
+    rangeMax: '',
+    format: 'yyyy-MM-dd HH:mm:ss',
+    pickHandler: function (date) {
+        alert(date);
+    }
+};
+window.top.datePicker(options, window, null);
+            </textarea>
+            <br>
+            <button id="btn_run_example_4" class="blue" style="position: relative; top: 2px;">修改并运行示例</button>
+            <script type="text/javascript">
+                $('#btn_run_example_4').on('click', function () {
+                    var jsCode = $('#txt_jsCode_example_4').val();
+                    eval(jsCode);
+                });
+            </script>
+        </p>
+        <div style="margin-left: 8px; margin-top: 16px; text-align: left; padding: 16px; border: 1px #000 solid;" id="div_dateRenedr">
+            这是一个ID为“div_dateRenedr”的DIV控件
+        </div>
+    </div>
+</body>
+</html>

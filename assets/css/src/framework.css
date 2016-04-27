@@ -1,0 +1,572 @@
+﻿/*
+=====================================================================================
+管理平台主框架页面样式
+=====================================================================================
+*/
+
+/* 整体结构 */
+html,
+body {
+    min-width: 1280px;
+}
+
+.header,
+.wrapper,
+.footer {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+
+.header {
+    height: 48px;
+    background: url(/assets/images/bgs/dark.png) repeat left top;
+    border-bottom: 4px solid #ef705b;
+    top: 0;
+}
+
+.wrapper {
+    top: 52px;
+    bottom: 4px;
+    z-index: 8;
+}
+
+.footer {
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+    border-top: 4px #ef705b solid;
+    bottom: 0;
+    z-index: 8;
+}
+
+/* 分块填充 - header */
+.header > a.logo {
+    float: left;
+    display: inline-block;
+    width: 250px;
+    height: 100%;
+    background: url(/assets/images/logos/logo.png) no-repeat 16px center;
+}
+
+.header > ul {
+    float: left;
+    height: 100%;
+    border-left: 1px solid #464646;
+    border-right: 1px solid #464646;
+}
+
+    .header > ul.menu {
+        margin-left: 0px;
+    }
+
+    .header > ul.extend {
+        float: right;
+        margin-right: 16px;
+    }
+
+    .header > ul > li {
+        float: left;
+        height: 100%;
+        border-right: 1px solid #252525;
+        position: relative;
+    }
+
+        .header > ul > li:first-child {
+            border-left: 1px solid #252525;
+        }
+
+        .header > ul > li > a {
+            display: block;
+            border-left: 1px solid #464646;
+            border-right: 1px solid #464646;
+            cursor: pointer;
+        }
+
+            .header > ul > li > a:hover {
+                background-color: #333;
+                border-color: #333;
+            }
+
+            .header > ul > li > a > i,
+            .header > ul > li > a > img,
+            .header > ul > li > a > label,
+            .header > ul > li > a > span {
+                cursor: pointer;
+                color: #fff;
+            }
+
+    /* 主菜单 */
+    .header > ul.menu > li > a {
+        width: auto;
+        height: 40px;
+        padding: 5px 14px 3px 14px;
+        text-align: center;
+    }
+
+        .header > ul.menu > li > a > i,
+        .header > ul.menu > li > a > label {
+            display: block;
+        }
+
+        .header > ul.menu > li > a > i {
+            width: 24px;
+            height: 24px;
+            margin: 0 auto;
+            font-size: 24px;
+            opacity: .6;
+            filter: alpha(opacity=60);
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100% 100%;
+        }
+
+        .header > ul.menu > li > a > label {
+            height: 16px;
+            line-height: 16px;
+            opacity: .8;
+            filter: alpha(opacity=80);
+        }
+
+        .header > ul.menu > li > a:hover > i,
+        .header > ul.menu > li > a:hover > label {
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+    /* 扩展信息（全屏浏览、消息通知、当前登录用户信息等部分） */
+    .header > ul.extend > li.fullView > a,
+    .header > ul.extend > li.message > a {
+        width: 36px;
+        height: 36px;
+        padding: 8px 6px 4px 6px;
+    }
+
+    /* 全屏显示（隐藏左边框架） */
+    .header > ul.extend > li.fullView > a {
+        background: url(/assets/images/icons/icon_fullview.png) no-repeat center center;
+    }
+
+    /* 用户消息 */
+    .header > ul.extend > li.message > a {
+        background: url(/assets/images/icons/icon_msg.png) no-repeat center 18px;
+        position: relative;
+    }
+
+        .header > ul.extend > li.message > a > span {
+            display: block;
+            width: 6px;
+            height: 6px;
+            line-height: 0;
+            font-size: 0;
+            background: #ef705b;
+            overflow: hidden;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            right: 10px;
+        }
+
+    /* 用户信息 */
+    .header > ul.extend > li.userInfo > a {
+        height: 36px;
+        line-height: 36px;
+        padding: 6px 14px;
+    }
+
+        .header > ul.extend > li.userInfo > a > img {
+            float: left;
+            width: 36px;
+            height: 36px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .header > ul.extend > li.userInfo > a > label {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .header > ul.extend > li.userInfo > a > span {
+            display: inline-block;
+            width: 0px;
+            height: 0px;
+            font-size: 0px;
+            line-height: 0px;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #fff;
+            overflow: hidden;
+            margin-bottom: 3px;
+            margin-left: 5px;
+        }
+
+    /* 主菜单浮动层 */
+    .header > ul > li ul {
+        display: none;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-top: none;
+        -moz-box-shadow: 1px 2px 2px #ccc;
+        -webkit-box-shadow: 1px 2px 2px #ccc;
+        box-shadow: 1px 2px 2px #ccc;
+        position: absolute;
+        left: -1px;
+        top: 52px;
+    }
+
+    .header > ul > li > ul:after {
+        display: inline-block;
+        content: '';
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 5px solid #fff;
+        position: absolute;
+        top: -4px;
+        left: 50%;
+        margin-left: -6px;
+    }
+
+    .header > ul > li ul > li {
+        border-top: 1px solid #e5e5e5;
+        background: #f8f8f8;
+        background: -moz-linear-gradient(top, #fefefe 0%, #f8f8f8 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#f8f8f8));
+        background: -webkit-linear-gradient(top, #fefefe 0%, #f8f8f8 100%);
+        background: -o-linear-gradient(top, #fefefe 0%, #f8f8f8 100%);
+        background: linear-gradient(top, #fefefe 0%, #f8f8f8 100%);
+        position: relative;
+    }
+
+        .header > ul > li ul > li:first-child {
+            border-top: none;
+        }
+
+        .header > ul > li ul > li > a {
+            display: block;
+            height: 20px;
+            line-height: 20px;
+            padding: 9px 14px 7px 14px;
+        }
+
+            .header > ul > li ul > li > a > i,
+            .header > ul > li ul > li > a > label,
+            .header > ul > li ul > li > a > span {
+                float: left;
+                display: inline-block;
+                height: 14px;
+                color: #787878;
+                cursor: pointer;
+            }
+
+            .header > ul > li ul > li > a > i {
+                width: 14px;
+                font-size: 14px;
+            }
+
+            .header > ul > li ul > li > a > label {
+                margin-left: 6px;
+                font-size: 12px;
+            }
+
+            .header > ul > li ul > li > a > span {
+                float: right;
+                width: 14px;
+                margin-left: 6px;
+            }
+
+            .header > ul > li ul > li > a:hover,
+            .header > ul > li ul > li > a.active {
+                box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+                -webkit-box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+                -moz-box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+            }
+
+                .header > ul > li ul > li > a:hover > i,
+                .header > ul > li ul > li > a:hover > label,
+                .header > ul > li ul > li > a.active > i,
+                .header > ul > li ul > li > a.active > label {
+                    color: #ef705b;
+                }
+
+    /* 主菜单浮动层 */
+    .header > ul.menu > li ul.dropdown-menu {
+        width: 160px;
+    }
+
+    .header > ul.menu > li > ul.dropdown-menu:after {
+        left: 25%;
+    }
+
+    .header > ul.menu > li ul.menu-sub {
+        border-top: 1px solid #ccc;
+        left: 160px;
+        top: -1px;
+        z-index: 10;
+    }
+
+    .header > ul.menu > li ul.dropdown-menu > li > a > span {
+        background: url(/assets/images/arrows/icon_small_arrow_right_g.png) no-repeat center bottom;
+    }
+
+    .header > ul.menu > li ul.dropdown-menu > li > a.active > span,
+    .header > ul.menu > li ul.dropdown-menu > li > a:hover > span {
+        background: url(/assets/images/arrows/icon_small_arrow_right_r.png) no-repeat center bottom;
+    }
+
+    /* 用户信息浮动层 */
+    .header > ul.extend > li.userInfo > ul.dropdown-user {
+        right: -1px;
+    }
+
+        .header > ul.extend > li.userInfo > ul.dropdown-user > li > a > span {
+            width: 20px;
+            height: 20px;
+            background-color: #ef705b;
+            text-align: center;
+            font-size: 12px;
+            line-height: 20px;
+            color: #fff;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+/* 分块填充 - wrapper */
+.wrapper > .sidebar {
+    display: block;
+    float: left;
+    width: 250px;
+    height: 100%;
+    border-right: 1px #c7c7c7 solid;
+    overflow: hidden;
+}
+
+    .wrapper > .sidebar > .container {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+        .wrapper > .sidebar > .container > ul {
+            height: 31px;
+            background: -moz-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f0f0));
+            background: -webkit-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: -o-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            background: linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+            border-bottom: 1px solid #c7c7c7;
+            box-shadow: 0 1px 0 #fff;
+        }
+
+            /* 当前菜单标题区域 */
+            .wrapper > .sidebar > .container > ul > li {
+                width: 218px;
+                height: 14px;
+                padding: 9px 16px 8px 16px;
+                line-height: 14px;
+                text-align: left;
+            }
+
+                .wrapper > .sidebar > .container > ul > li > i,
+                .wrapper > .sidebar > .container > ul > li > label {
+                    float: left;
+                    display: block;
+                    height: 14px;
+                    color: #333;
+                }
+
+                .wrapper > .sidebar > .container > ul > li > i {
+                    width: 14px;
+                    font-size: 14px;
+                }
+
+                .wrapper > .sidebar > .container > ul > li > label {
+                    font-size: 12px;
+                    margin-left: 4px;
+                }
+
+        /* 左边框架页面嵌入容器 */
+        .wrapper > .sidebar > .container > .sideFrameRender {
+            position: absolute;
+            left: 0;
+            top: 32px;
+            right: 0;
+            bottom: 0;
+        }
+
+.wrapper > .content {
+    height: 100%;
+    margin-left: 252px;
+    border-left: 1px #c7c7c7 solid;
+    position: relative;
+}
+
+    .wrapper > .content > ul {
+        height: 31px;
+        background: -moz-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f0f0));
+        background: -webkit-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+        background: -o-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+        background: linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
+        border-bottom: 1px solid #c7c7c7;
+        box-shadow: 0 1px 0 #fff;
+        /*overflow: hidden;*/
+    }
+
+        /* 菜单选项卡区域 */
+        .wrapper > .content > ul > li {
+            float: left;
+            height: 14px;
+            line-height: 14px;
+            padding: 6px 20px 4px 10px;
+            margin-left: 2px;
+            border: 1px #c7c7c7 solid;
+            border-bottom: none;
+            -moz-border-radius: 3px 3px 0 0;
+            -webkit-border-radius: 3px 3px 0 0;
+            border-radius: 3px 3px 0 0;
+            -moz-box-shadow: -1px -1px 2px #fafafa, 1px -1px 2px #fafafa;
+            -webkit-box-shadow: -1px -1px 2px #fafafa, -1px 1px 2px #fafafa;
+            box-shadow: -1px -1px 2px #fafafa, 1px -1px 2px #fafafa;
+            background: -moz-linear-gradient(center top, #f0f0f0 0%, #fff 99%);
+            background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#f0f0f0), color-stop(100%,#fff));
+            background: -webkit-linear-gradient(center top, #f0f0f0 0%, #fff 99%);
+            background: -o-linear-gradient(center top, #f0f0f0 0%, #fff 99%);
+            background: linear-gradient(center top, #f0f0f0 0%, #fff 99%);
+            cursor: pointer;
+            position: relative;
+            top: 6px;
+        }
+
+            .wrapper > .content > ul > li > i,
+            .wrapper > .content > ul > li > label,
+            .wrapper > .content > ul > li > span {
+                float: left;
+                display: block;
+                height: 14px;
+                color: #787878;
+                cursor: pointer;
+            }
+
+            .wrapper > .content > ul > li > i {
+                width: 14px;
+                font-size: 14px;
+            }
+
+            .wrapper > .content > ul > li > label {
+                font-size: 12px;
+                font-weight: 600;
+                margin-left: 4px;
+            }
+
+            .wrapper > .content > ul > li > span {
+                width: 11px;
+                height: 11px;
+                line-height: 0;
+                font-size: 0;
+                overflow: hidden;
+                background: url(/assets/images/icons/icon_close.png) no-repeat left top;
+                opacity: .4;
+                filter: alpha(opacity=40);
+                position: absolute;
+                top: 4px;
+                right: 4px;
+            }
+
+                .wrapper > .content > ul > li > span:hover {
+                    opacity: 1;
+                    filter: alpha(opacity=100);
+                    -webkit-transition: opacity 0.2s ease-in-out;
+                    -moz-transition: opacity 0.2s ease-in-out;
+                    transition: opacity 0.2s ease-in-out;
+                }
+
+            .wrapper > .content > ul > li:hover {
+                background: -moz-linear-gradient(center top, #f7f7f7 0%, #fefefe 99%);
+                background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#f7f7f7), color-stop(100%,#fefefe));
+                background: -webkit-linear-gradient(center top, #f7f7f7 0%, #fefefe 99%);
+                background: -o-linear-gradient(center top, #f7f7f7 0%, #fefefe 99%);
+                background: linear-gradient(center top, #f7f7f7 0%, #fefefe 99%);
+            }
+
+                .wrapper > .content > ul > li:hover > i,
+                .wrapper > .content > ul > li:hover > label {
+                    color: #454545;
+                }
+
+            .wrapper > .content > ul > li.active,
+            .wrapper > .content > ul > li.active:hover {
+                top: 2px;
+                padding: 9px 20px 6px 10px;
+                background: -moz-linear-gradient(center top, #f7f7f7 0%, #fafafa 100%);
+                background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#f7f7f7), color-stop(100%,#fafafa));
+                background: -webkit-linear-gradient(center top, #f7f7f7 0%, #fafafa 100%);
+                background: -o-linear-gradient(center top, #f7f7f7 0%, #fafafa 100%);
+                background: linear-gradient(center top, #f7f7f7 0%, #fafafa 100%);
+            }
+
+                .wrapper > .content > ul > li.active > i,
+                .wrapper > .content > ul > li.active > label {
+                    color: #333;
+                }
+
+                .wrapper > .content > ul > li.active > span {
+                    top: 5px;
+                }
+
+            .wrapper > .content > ul > li.noClosed:first-child {
+                padding-right: 10px;
+            }
+
+    /* 右边嵌入页面框架区域 */
+    .wrapper > .content > .container {
+        position: absolute;
+        left: 0;
+        top: 32px;
+        right: 0;
+        bottom: 0;
+    }
+
+        .wrapper > .content > .container > .mainFrameRender {
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+
+            .wrapper > .sidebar > .container > .sideFrameRender > iframe,
+            .wrapper > .content > .container > .mainFrameRender > iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                overflow: auto;
+            }
+
+/* 屏幕宽度适配 */
+@media all and (max-width: 1280px) {
+    .header > a.logo {
+        display: none;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .header > ul.extend {
+        display: none;
+    }
+
+    .wrapper > .sidebar {
+        display: none;
+    }
+
+    .wrapper > .content {
+        margin-left: 0;
+        border-left: none;
+    }
+}

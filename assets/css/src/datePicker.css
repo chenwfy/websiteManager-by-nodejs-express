@@ -1,0 +1,375 @@
+﻿/*
+=====================================================================================
+管理平台 - 日期选择器样式
+=====================================================================================
+*/
+
+/* 浮动层 */
+.dp-layer {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999999;
+    width: 263px;
+    height: 313px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+}
+
+/* 内容容器 */
+.dp-wrapper {
+    width: 260px;
+    height: auto;
+    padding: 1px 1px 1px 0;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+    .dp-wrapper > ul {
+        width: 260px;
+        height: 30px;
+        margin-bottom: 1px;
+    }
+
+        .dp-wrapper > ul.year-month {
+        }
+
+            .dp-wrapper > ul.year-month > li {
+                position: relative;
+                /*z-index: 5;*/
+                float: left;
+                margin-left: 1px;
+                width: 127px;
+                height: 28px;
+                background-color: #fff;
+                border: 1px rgba(0, 0, 0, 0.3) solid;
+            }
+
+                .dp-wrapper > ul.year-month > li > span {
+                    float: left;
+                    display: block;
+                    width: 28px;
+                    height: 28px;
+                    background-color: #f4f4f4;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                }
+
+                    .dp-wrapper > ul.year-month > li > span.prev {
+                        background-image: url(/assets/images/bgs/arrow_left_a.png);
+                    }
+
+                    .dp-wrapper > ul.year-month > li > span.prev-dis {
+                        background-image: url(/assets/images/bgs/arrow_left_b.png);
+                    }
+
+                    .dp-wrapper > ul.year-month > li > span.next {
+                        background-image: url(/assets/images/bgs/arrow_right_a.png);
+                    }
+
+                    .dp-wrapper > ul.year-month > li > span.next-dis {
+                        background-image: url(/assets/images/bgs/arrow_right_b.png);
+                    }
+
+                .dp-wrapper > ul.year-month > li > p {
+                    float: left;
+                    padding: 4px 16px 4px 13px;
+                    width: 40px;
+                    height: 20px;
+                    border-left: 1px rgba(0, 0, 0, 0.3) solid;
+                    border-right: 1px rgba(0, 0, 0, 0.3) solid;
+                    background: url(/assets/images/bgs/arrow_down_a.png) no-repeat 56px center;
+                    text-align: center;
+                    line-height: 20px;
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: normal;
+                }
+
+                .dp-wrapper > ul.year-month > li > span,
+                .dp-wrapper > ul.year-month > li > p {
+                    cursor: pointer;
+                }
+
+                /* 年、月选择弹层 */
+                .dp-wrapper > ul.year-month > li > div.ym-layer {
+                    display: none;
+                    position: absolute;
+                    left: -1px;
+                    top: 28px;
+                    /*z-index: 5;*/
+                    width: 127px;
+                    height: 186px;
+                    background-color: #fff;
+                    border: 1px rgba(0, 0, 0, 0.3) solid;
+                }
+
+                    .dp-wrapper > ul.year-month > li > div.ym-layer > span {
+                        display: block;
+                        width: 100%;
+                        height: 30px;
+                        background-color: #f4f4f4;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        cursor: pointer;
+                    }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > span.up {
+                            background-image: url(/assets/images/bgs/arrow_up_a.png);
+                            border-bottom: 1px rgba(0, 0, 0, 0.3) solid;
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > span.up-dis {
+                            background-image: url(/assets/images/bgs/arrow_up_b.png);
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > span.down {
+                            background-image: url(/assets/images/bgs/arrow_down_a.png);
+                            border-top: 1px rgba(0, 0, 0, 0.3) solid;
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > span.down-dis {
+                            background-image: url(/assets/images/bgs/arrow_down_b.png);
+                        }
+
+                    .dp-wrapper > ul.year-month > li > div.ym-layer > p {
+                        width: 100%;
+                        height: 124px;
+                    }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > p > label {
+                            float: left;
+                            display: block;
+                            width: 62px;
+                            height: 30px;
+                            margin-left: 1px;
+                            margin-top: 1px;
+                            text-align: center;
+                            line-height: 30px;
+                            color: #666;
+                            font-size: 12px;
+                            font-weight: normal;
+                            cursor: pointer;
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > p.month {
+                            height: 186px;
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > p > label:hover {
+                            background-color: rgba(0, 0, 0, .1);
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > p > label.dis {
+                            background-color: #fff;
+                            color: #ccc;
+                            cursor: default;
+                        }
+
+                        .dp-wrapper > ul.year-month > li > div.ym-layer > p > label.active {
+                            background-color: rgba(0, 0, 0, .15);
+                            color: #333;
+                        }
+
+        .dp-wrapper > ul.week {
+            margin-bottom: 0;
+        }
+
+            .dp-wrapper > ul.week > li {
+                float: left;
+                margin-left: 1px;
+                width: 36px;
+                height: 30px;
+                background-color: rgba(0, 0, 0, 0.3);
+                text-align: center;
+                line-height: 30px;
+                color: #fff;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+                .dp-wrapper > ul.week > li:first-child {
+                    width: 37px;
+                }
+
+        .dp-wrapper > ul.day {
+            height: 186px;
+        }
+
+            .dp-wrapper > ul.day > li {
+                float: left;
+                margin-left: 1px;
+                margin-top: 1px;
+                width: 36px;
+                height: 30px;
+                background-color: rgba(0, 0, 0, 0.08);
+                text-align: center;
+                line-height: 30px;
+                color: #454545;
+                font-size: 12px;
+                font-weight: normal;
+                cursor: pointer;
+            }
+
+                .dp-wrapper > ul.day > li:nth-child(7n+1) {
+                    width: 37px;
+                }
+
+                .dp-wrapper > ul.day > li:nth-child(7n+1),
+                .dp-wrapper > ul.day > li:nth-child(7n+7) {
+                    /*color: #333;*/
+                    font-weight: 600;
+                }
+
+                .dp-wrapper > ul.day > li:hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+
+                .dp-wrapper > ul.day > li.dis,
+                .dp-wrapper > ul.day > li.dis:hover {
+                    background-color: rgba(0, 0, 0, 0.08);
+                    color: #ccc;
+                    cursor: default;
+                }
+
+                .dp-wrapper > ul.day > li.attach {
+                    color: #787878;
+                }
+
+                .dp-wrapper > ul.day > li.active {
+                    background-color: rgba(0, 0, 0, 0.4);
+                    color: #fff;
+                    font-weight: 600;
+                }
+
+        .dp-wrapper > ul.time {
+        }
+
+            .dp-wrapper > ul.time > li {
+                float: left;
+            }
+
+                .dp-wrapper > ul.time > li.txt {
+                    margin-left: 1px;
+                    width: 64px;
+                    background-color: rgba(0, 0, 0, 0.1);
+                    text-align: center;
+                    line-height: 30px;
+                    color: #333;
+                    font-size: 12px;
+                }
+
+                .dp-wrapper > ul.time > li.timer {
+                    position: relative;
+                    width: 193px;
+                    height: 28px;
+                    background-color: #fff;
+                    border: 1px rgba(0, 0, 0, 0.3) solid;
+                }
+
+                    .dp-wrapper > ul.time > li.timer > label {
+                        float: left;
+                        display: block;
+                        width: 48px;
+                        height: 28px;
+                        line-height: 28px;
+                        text-align: center;
+                        color: #333;
+                        font-size: 12px;
+                        font-weight: normal;
+                        cursor: pointer;
+                    }
+
+                        .dp-wrapper > ul.time > li.timer > label.short {
+                            width: 24px;
+                            line-height: 24px;
+                            cursor: default;
+                        }
+
+                    /* 时、分、秒选择弹层 */
+                    .dp-wrapper > ul.time > li.timer > div.time-layer {
+                        /*display: none;*/
+                        position: absolute;
+                        left: -65px;
+                        bottom: 28px;
+                        width: 259px;
+                        height: auto;
+                        padding-bottom: 1px;
+                        background-color: #fff;
+                        border: 1px rgba(0, 0, 0, 0.3) solid;
+                        border-left: none;
+                        border-right: none;
+                        overflow: hidden;
+                    }
+
+                        .dp-wrapper > ul.time > li.timer > div.time-layer > span {
+                            float: left;
+                            display: block;
+                            width: 25px;
+                            height: 25px;
+                            margin-left: 1px;
+                            margin-top: 1px;
+                            text-align: center;
+                            line-height: 25px;
+                            color: #666;
+                            font-size: 12px;
+                            font-weight: normal;
+                            background-color: #fff;
+                            cursor: pointer;
+                        }
+
+                            .dp-wrapper > ul.time > li.timer > div.time-layer > span:nth-child(10n+1) {
+                                margin-left: 0;
+                            }
+
+                            .dp-wrapper > ul.time > li.timer > div.time-layer > span:hover {
+                                background-color: rgba(0, 0, 0, .1);
+                            }
+
+                            .dp-wrapper > ul.time > li.timer > div.time-layer > span.dis {
+                                background-color: #fff;
+                                color: #ccc;
+                                cursor: default;
+                            }
+
+                            .dp-wrapper > ul.time > li.timer > div.time-layer > span.active {
+                                background-color: rgba(0, 0, 0, .15);
+                                color: #333;
+                            }
+
+        .dp-wrapper > ul.button {
+            margin-bottom: 0;
+        }
+
+            .dp-wrapper > ul.button > li {
+                height: 30px;
+                text-align: left;
+            }
+
+                .dp-wrapper > ul.button > li > input[type=button] {
+                    float: left;
+                    margin-left: 1px;
+                    display: block;
+                    background: none;
+                    border: none;
+                    background-color: rgba(0, 0, 0, 0.03);
+                    border: 1px rgba(0, 0, 0, 0.3) solid;
+                    width: 64px;
+                    height: 30px;
+                    text-align: center;
+                    line-height: 28px;
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: 500;
+                    cursor: pointer;
+                }
+
+                    .dp-wrapper > ul.button > li > input[type=button]:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }

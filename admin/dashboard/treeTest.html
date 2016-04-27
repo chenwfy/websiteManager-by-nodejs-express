@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 系统菜单管理树</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/sideMenu.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/sideMenu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var treeRoot = $('.treeRoot > ul');
+            buildTree(treeRoot, { menuId: 0 });
+
+            $('a.root').on('click', function (e) {
+                window.top.FWK.MainFrameWindow().location.href = 'menuList.html?menuId=0';
+                $('.unfolder').click();
+                $('.active').removeClass('active');
+                !$(this).hasClass('active') && $(this).addClass('active');
+            });
+
+            $('#btn_save').on('click', formSubmit);
+            $('#btn_close').on('click', winClose);
+
+            window.setTimeout(function () {
+                alert('收起');
+                sideMenu.tree.foldedAll($('.treeRoot'));
+            }, 3000);
+        });
+
+
+        var level = 0,
+            menuSelecteds = [2, 17, 19];
+
+        var buildTree = function (render, parentData) {
+            var loaderUrl = '/service/coreMenu/getMenuTree',
+                dataKeys = { 'nodeText': 'menuName', 'checkboxValue': level + '_{menuId}', 'hasSubNode': 'childRen' },
+                loader = $.ajaxPost(loaderUrl, { parentId: parentData.menuId });
+            $.when(loader).done(function (json) {
+                var menuData = json.data,
+                    menuIcon = function () { return '<img src="' + (this.status == 1 ? '/res/icons/icon_yes_12.gif' : '/res/icons/icon_no_12.gif') + '" alt="">'; },
+                    nodeEvent = buildTree,
+                    textEvent = function () { window.top.FWK.MainFrameWindow().location.href = 'menuList.html?menuId=' + this.menuId; },
+                    //checkbox = false; // true; //function () { };
+                    checkbox = function () {
+                        var curId = this.menuId;
+                        return menuSelecteds.indexOf(curId) >= 0;
+                    };
+
+                sideMenu.tree.build(menuData, dataKeys, render, menuIcon, nodeEvent, textEvent, checkbox, true);
+                level++;
+            });
+        };
+
+        var formSubmit = function () {
+            //var checked = sideMenu.tree.getChecked($('.treeRoot'), '1_');
+            var checked = sideMenu.tree.getChecked($('.treeRoot'));
+            alert(JSON.stringify(checked));
+
+            //弹窗返回内容给父级列表页面
+            //window.frameElement.callback(checked);
+            //window.top.dialog.close();
+        }
+
+        var winClose = function () {
+            window.top.dialog.close();
+        };
+    </script>
+</head>
+<body>
+    <div class="wrap fixed-wrap wrapper">
+        <div class="treeRoot">
+            <a href="javascript:void(0);" class="root" title="点击查看所有顶级系统菜单">系统菜单管理</a>
+            <ul>
+                <li class="loading">加载中，请稍后……</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="fixed-options">
+        <button class="blue" id="btn_save">
+            <i class="icon-Awesome-check"></i>
+            确定
+        </button>
+        <button id="btn_close">
+            <i class="icon-Awesome-close"></i>
+            关闭
+        </button>
+    </div>
+</body>
+</html>

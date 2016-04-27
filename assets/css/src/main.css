@@ -1,0 +1,1023 @@
+﻿/*
+=====================================================================================
+管理平台 - 右边主框架页面基本样式
+=====================================================================================
+*/
+
+/* 基础元素设置 */
+input,
+textarea,
+select,
+button {
+    font-size: 12px;
+}
+
+input {
+    vertical-align: middle;
+}
+
+    input[type="text"],
+    input[type="password"],
+    textarea {
+        padding: 0 5px;
+        height: 24px;
+        width: 80%;
+        border: 1px solid #ccc;
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        /*background: #fff url(/assets/images/bgs/input_bg2.gif) repeat-x left top;*/
+        line-height: 24px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: normal;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+        input[type="text"]:hover,
+        input[type="password"]:hover,
+        textarea:hover {
+            border-color: #888;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        textarea:focus {
+            border-color: #ef705b;
+        }
+
+        input[type="text"].image-picker {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-image: url(/assets/images/bgs/input_bg_image.png);
+        }
+
+        input[type="text"].date-picker {
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-image: url(/assets/images/bgs/input_bg_calendar.png);
+        }
+
+textarea {
+    min-height: 96px;
+    resize: none;
+}
+
+select {
+    height: 24px;
+    line-height: 24px;
+    border: 1px solid #ccc;
+    /*background: url(/assets/images/bgs/input_bg2.gif) repeat-x left top;*/
+    display: inline;
+    color: #333;
+    text-align: left;
+}
+
+    select:hover {
+        border-color: #888;
+    }
+
+    select:focus {
+        border-color: #ef705b;
+    }
+
+    select option {
+        height: 24px;
+        line-height: 24px;
+        background-color: #f7f7f7;
+        color: #333;
+        text-align: left;
+    }
+
+        select option:hover {
+            background-color: #ccc;
+            color: #000;
+        }
+
+a {
+    color: #08d;
+    text-decoration: none;
+    border: 0;
+    background-color: transparent;
+}
+
+    a:hover {
+        color: #f80;
+        text-decoration: underline;
+    }
+
+    a:active,
+    a:focus {
+        color: #f60;
+        text-decoration: none;
+    }
+
+    a img {
+        border: none 0;
+        vertical-align: middle;
+    }
+
+/* 按钮 */
+button {
+    display: inline-block;
+    width: auto;
+    min-width: 48px;
+    height: 30px;
+    padding: 0 4px;
+    /*margin-left: 16px;*/
+    background: -moz-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+    background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f7f7f7));
+    background: -webkit-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+    background: -o-linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+    background: linear-gradient(center top, #ffffff 0%, #f7f7f7 100%);
+    border: 1px solid #d5d5d5;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 26px;
+    color: #454545;
+    font-size: 14px;
+    font-weight: 500;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    cursor: pointer;
+}
+
+    button ~ button {
+        margin-left: 16px;
+    }
+
+    button > i {
+        /*display: inline-block;*/
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+        color: #454545;
+        margin-right: 2px;
+    }
+
+        button > i.rotate::before {
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+        }
+
+    button:hover {
+        background: #efefef;
+        color: #333;
+    }
+
+    button:active {
+        background: #e7e7e7;
+        color: #333;
+    }
+
+        button:hover > i,
+        button:active > i {
+            color: #333;
+        }
+
+    button.blue {
+        background: -moz-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#53b8d6), color-stop(100%,#389ebc));
+        background: -webkit-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+        background: -o-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+        background: linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+        border-color: #389ebc;
+        color: #ffffff;
+    }
+
+        button.blue > i {
+            color: #ffffff;
+        }
+
+        button.blue:hover {
+            background: #389ebc;
+        }
+
+        button.blue:active {
+            background: #46abc9;
+        }
+
+    button.orange {
+        background: -moz-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#d65f4d), color-stop(100%,#c05343));
+        background: -webkit-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+        background: -o-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+        background: linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+        border-color: #c05343;
+        color: #ffffff;
+    }
+
+        button.orange > i {
+            color: #ffffff;
+        }
+
+        button.orange:hover {
+            background: #c05343;
+        }
+
+        button.orange:active {
+            background: #cc5949;
+        }
+
+    button.green {
+        background: -moz-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#69b076), color-stop(100%,#4ca15b));
+        background: -webkit-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+        background: -o-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+        background: linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+        border-color: #4ca15b;
+        color: #ffffff;
+    }
+
+        button.green > i {
+            color: #ffffff;
+        }
+
+        button.green:hover {
+            background: #4ca15b;
+        }
+
+        button.green:active {
+            background: #51a351;
+        }
+
+/* 导航条 */
+.main-nav {
+    padding: 1px 0;
+}
+
+    .main-nav > ul {
+        background: #f7f7f7;
+        background: -moz-linear-gradient(top, #ffffff, #f7f7f7);
+        background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f7f7f7));
+        background: -webkit-linear-gradient(top, #ffffff, #f7f7f7);
+        background: -o-linear-gradient(top, #ffffff, #f7f7f7);
+        background: linear-gradient(to bottom, #ffffff, #f7f7f7);
+        border-top: 1px solid #c5c5c5;
+        border-bottom: 1px solid #d5d5d5;
+        height: 38px;
+    }
+
+        .main-nav > ul > li {
+            padding: 4px 10px;
+        }
+
+            .main-nav > ul > li.title {
+                float: left;
+                line-height: 30px;
+                text-align: left;
+            }
+
+                .main-nav > ul > li.title > i {
+                    width: 14px;
+                    height: 14px;
+                    font-size: 14px;
+                    color: #787878;
+                }
+
+                    .main-nav > ul > li.title > i.orange {
+                        color: #ef705b;
+                    }
+
+                    .main-nav > ul > li.title > i.blue {
+                        color: #389ebc;
+                    }
+
+                    .main-nav > ul > li.title > i.green {
+                        color: #4ca15b;
+                    }
+
+                .main-nav > ul > li.title > label {
+                    margin-left: 4px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: #333;
+                }
+
+            .main-nav > ul > li.button {
+                float: right;
+            }
+
+                .main-nav > ul > li.button button {
+                    float: right;
+                    margin-left: 8px;
+                }
+
+.main-nav-ow {
+    padding: 0;
+}
+
+    .main-nav-ow > ul {
+        border: none;
+        background: #fff;
+        height: 40px;
+    }
+
+        .main-nav-ow > ul > li {
+            padding: 5px 10px;
+        }
+
+/* 内容区 */
+.wrap {
+    position: relative;
+    /*padding: 4px 10px 4px 4px;*/
+    padding: 4px;
+}
+
+.fixed-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 41px;
+    overflow: auto;
+}
+
+.fixed-options {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 39px;
+    line-height: 40px;
+    border-top: 1px solid #c5c5c5;
+    background-color: #f8f8f8;
+}
+
+    .fixed-options button ~ button {
+        margin-left: 24px;
+    }
+
+/* 图标 */
+.wrap-icons {
+    position: fixed;
+    left: 4px;
+    top: 41px;
+    right: 0;
+    bottom: 0;
+    padding-bottom: 16px;
+    overflow: auto;
+}
+
+    .wrap-icons > label {
+        float: left;
+        display: block;
+        width: 400px;
+        height: 50px;
+        line-height: 50px;
+        text-align: left;
+        color: #666;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+        .wrap-icons > label > i {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+
+        .wrap-icons > label:hover,
+        .wrap-icons > label:hover > i {
+            color: #389ebc;
+            font-size: 16px;
+        }
+
+            .wrap-icons > label:hover > i[class^="icon-Ionicons-"],
+            .wrap-icons > label:hover > i[class^=" icon-Ionicons-"],
+            .wrap-icons > label:hover > i[class^="icon-Awesome-"],
+            .wrap-icons > label:hover > i[class^=" icon-Awesome-"] {
+                width: 32px;
+                height: 32px;
+                font-size: 32px;
+            }
+
+/* 图标弹层选择 */
+.navi-iconWrap {
+    width: 100%;
+    height: 39px;
+    border-bottom: 1px #e4e4e4 solid;
+}
+
+    .navi-iconWrap > tbody > tr {
+        height: 100%;
+    }
+
+        .navi-iconWrap > tbody > tr > td {
+            position: relative;
+            width: 33%;
+            text-align: center;
+            vertical-align: middle;
+            border-left: 1px #e4e4e4 solid;
+            background-color: #f4f4f4;
+        }
+
+            .navi-iconWrap > tbody > tr > td:first-child {
+                border-left: none;
+            }
+
+            .navi-iconWrap > tbody > tr > td > a {
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: block;
+                width: 100%;
+                height: 38px;
+                background-color: #fff;
+                text-align: center;
+                line-height: 40px;
+                color: #787878;
+                font-size: 16px;
+                font-weight: 500;
+                text-decoration: none;
+            }
+
+                .navi-iconWrap > tbody > tr > td > a.active {
+                    color: #666;
+                    font-weight: 600;
+                    top: 1px;
+                }
+
+.box-iconWrap {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 41px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+}
+
+    .box-iconWrap > a {
+        float: left;
+        display: block;
+        width: 62px;
+        height: 62px;
+        margin-left: 4px;
+        margin-top: 4px;
+        border: 1px #f9f9f9 solid;
+        line-height: 64px;
+        text-decoration: none;
+        color: #787878;
+    }
+
+        .box-iconWrap > a > i {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+             color: #787878;
+        }
+
+        .box-iconWrap > a:hover {
+            border-color: #ef705b;
+        }
+
+        .box-iconWrap > a:hover,
+        .box-iconWrap > a:hover > i {
+            color: #ef705b;
+            font-size: 16px;
+        }
+
+            .box-iconWrap > a:hover > i[class^="icon-Ionicons-"],
+            .box-iconWrap > a:hover > i[class^=" icon-Ionicons-"],
+            .box-iconWrap > a:hover > i[class^="icon-Awesome-"],
+            .box-iconWrap > a:hover > i[class^=" icon-Awesome-"] {
+                width: 32px;
+                height: 32px;
+                font-size: 32px;
+            }
+
+/* 表格 */
+table {
+    width: 100%;
+}
+
+    /* 表单TABLE */
+    table.formTable {
+        background-color: #fff;
+        border: none;
+    }
+
+        table.formTable > tbody > tr {
+            height: 40px;
+        }
+
+            table.formTable > tbody > tr > td {
+                height: 40px;
+                background-color: #f8f8f8;
+                padding: 0 10px;
+                text-wrap: none;
+                vertical-align: middle;
+                line-height: 40px;
+                color: #333;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+                table.formTable > tbody > tr > td.td-31 {
+                    width: 15%;
+                }
+
+                table.formTable > tbody > tr > td.td-32 {
+                    width: 50%;
+                }
+
+                table.formTable > tbody > tr > td.td-33 {
+                    width: 35%;
+                }
+
+                table.formTable > tbody > tr > td.td-41,
+                table.formTable > tbody > tr > td.td-43 {
+                    width: 15%;
+                }
+
+                table.formTable > tbody > tr > td.td-42,
+                table.formTable > tbody > tr > td.td-44 {
+                    width: 35%;
+                }
+
+                table.formTable > tbody > tr > td.td-61,
+                table.formTable > tbody > tr > td.td-64 {
+                    width: 10%;
+                }
+
+                table.formTable > tbody > tr > td.td-62,
+                table.formTable > tbody > tr > td.td-65 {
+                    width: 25%;
+                }
+
+                table.formTable > tbody > tr > td.td-63,
+                table.formTable > tbody > tr > td.td-66 {
+                    width: 15%;
+                }
+
+                table.formTable > tbody > tr > td.td-31,
+                table.formTable > tbody > tr > td.td-41,
+                table.formTable > tbody > tr > td.td-43,
+                table.formTable > tbody > tr > td.td-61,
+                table.formTable > tbody > tr > td.td-64 {
+                    text-align: right;
+                }
+
+                table.formTable > tbody > tr > td.td-32,
+                table.formTable > tbody > tr > td.td-42,
+                table.formTable > tbody > tr > td.td-44,
+                table.formTable > tbody > tr > td.td-62,
+                table.formTable > tbody > tr > td.td-65 {
+                    text-align: left;
+                }
+
+                table.formTable > tbody > tr > td.td-33,
+                table.formTable > tbody > tr > td.td-63,
+                table.formTable > tbody > tr > td.td-66 {
+                    text-align: left;
+                    color: #787878;
+                }
+
+                table.formTable > tbody > tr > td.center {
+                    text-align: center;
+                }
+
+                table.formTable > tbody > tr > td input[type="radio"],
+                table.formTable > tbody > tr > td input[type="checkbox"] {
+                    margin-top: -3px;
+                    vertical-align: middle;
+                    cursor: pointer;
+                }
+
+                table.formTable > tbody > tr > td input[type="checkbox"] {
+                    margin-top: -2px;
+                }
+
+                table.formTable > tbody > tr > td label {
+                    cursor: pointer;
+                }
+
+                table.formTable > tbody > tr > td input[type="radio"] ~ label,
+                table.formTable > tbody > tr > td input[type="checkbox"] ~ label {
+                    margin-left: 4px;
+                }
+
+                table.formTable > tbody > tr > td label ~ input[type="radio"],
+                table.formTable > tbody > tr > td label ~ input[type="checkbox"] {
+                    margin-left: 16px;
+                }
+
+                table.formTable > tbody > tr > td span.sp12 {
+                    display: block;
+                    width: 12px;
+                    height: 12px;
+                    font-size: 0;
+                    line-height: 0;
+                    overflow: hidden;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                }
+
+                table.formTable > tbody > tr > td span.spYes {
+                    background-image: url(/assets/images/icons/icon_yes_12.gif);
+                }
+
+                table.formTable > tbody > tr > td span.spNo {
+                    background-image: url(/assets/images/icons/icon_no_12.gif);
+                }
+
+                table.formTable > tbody > tr > td button.small {
+                    position: relative;
+                    top: 2px;
+                    height: 26px;
+                    line-height: 22px;
+                    margin-left: 1px;
+                    cursor: pointer;
+                }
+
+                table.formTable > tbody > tr > td > textarea {
+                    position: relative;
+                    top: 6px;
+                }
+
+                table.formTable > tbody > tr > td > s {
+                    font-style: normal;
+                    color: #f00;
+                    margin-right: 4px;
+                    text-decoration: none;
+                }
+
+    /* 列表TABLE */
+    table.listTable {
+        background-color: #ddd;
+    }
+
+        table.listTable > thead,
+        table.listTable > tbody {
+        }
+
+            table.listTable > thead > tr,
+            table.listTable > tbody > tr {
+                height: 40px;
+            }
+
+            table.listTable > thead > tr {
+                /*background-color: #f8f8f8;*/
+                background: #eee;
+                /*background: -moz-linear-gradient(top, #ffffff, #f3f3f3);
+                background: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f3f3f3));
+                background: -webkit-linear-gradient(top, #ffffff, #f3f3f3);
+                background: -o-linear-gradient(top, #ffffff, #f3f3f3);
+                background: linear-gradient(to bottom, #ffffff, #f3f3f3);*/
+            }
+
+                table.listTable > thead > tr > th {
+                    padding: 0 10px;
+                    text-align: left;
+                    vertical-align: middle;
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+
+                    table.listTable > thead > tr > th.center {
+                        text-align: center;
+                    }
+
+                    table.listTable > thead > tr > th.th1 {
+                        width: auto;
+                    }
+
+                    table.listTable > thead > tr > th.th2 {
+                        width: 2%;
+                    }
+
+                    table.listTable > thead > tr > th.th3 {
+                        width: 3%;
+                    }
+
+                    table.listTable > thead > tr > th.th5 {
+                        width: 5%;
+                    }
+
+                    table.listTable > thead > tr > th.th8 {
+                        width: 8%;
+                    }
+
+                    table.listTable > thead > tr > th.th10 {
+                        width: 10%;
+                    }
+
+                    table.listTable > thead > tr > th.th15 {
+                        width: 15%;
+                    }
+
+                    table.listTable > thead > tr > th.th20 {
+                        width: 20%;
+                    }
+
+                    table.listTable > thead > tr > th.th25 {
+                        width: 25%;
+                    }
+
+                    table.listTable > thead > tr > th.th30 {
+                        width: 30%;
+                    }
+
+                    table.listTable > thead > tr > th.th40 {
+                        width: 40%;
+                    }
+
+                    table.listTable > thead > tr > th.th50 {
+                        width: 50%;
+                    }
+
+            table.listTable > tbody > tr {
+                background-color: #f9f9f9;
+            }
+
+                table.listTable > tbody > tr:nth-child(2n+1) {
+                    background-color: #fff;
+                }
+
+                table.listTable > tbody > tr.active
+                /*table.listTable > tbody > tr:hover*/ {
+                    /*background-color: rgba(239, 112, 91, .05);*/
+                    background-color: #e7e7e7;
+                }
+
+                table.listTable > tbody > tr > td {
+                    padding: 0 10px;
+                    text-align: left;
+                    vertical-align: middle;
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: normal;
+                    text-wrap: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                    table.listTable > tbody > tr > td.center {
+                        text-align: center;
+                    }
+
+                    table.listTable > tbody > tr > td a {
+                        color: #111;
+                        text-decoration: none;
+                        border: 0;
+                        background-color: transparent;
+                    }
+
+                        table.listTable > tbody > tr > td a:hover {
+                            color: #F60;
+                            text-decoration: none;
+                            border-bottom: 1px dashed #F60;
+                        }
+
+                        table.listTable > tbody > tr > td a:active,
+                        table.listTable > tbody > tr > td a:focus {
+                            color: #111;
+                            text-decoration: none;
+                        }
+
+                    table.listTable > tbody > tr > td span.sp12 {
+                        display: block;
+                        width: 12px;
+                        height: 12px;
+                        font-size: 0;
+                        line-height: 0;
+                        overflow: hidden;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                    }
+
+                    table.listTable > tbody > tr > td span.spYes {
+                        background-image: url(/assets/images/icons/icon_yes_12.gif);
+                    }
+
+                    table.listTable > tbody > tr > td span.spNo {
+                        background-image: url(/assets/images/icons/icon_no_12.gif);
+                    }
+
+                    table.listTable > tbody > tr > td img {
+                        width: 24px;
+                        height: 24px;
+                        margin-right: 8px;
+                        vertical-align: middle;
+                    }
+
+                    table.listTable > tbody > tr > td i[class^="icon-"],
+                    table.listTable > tbody > tr > td i[class^=" icon-"] {
+                        width: 16px;
+                        height: 16px;
+                        font-size: 16px;
+                        color: #333;
+                    }
+
+                    table.listTable > tbody > tr > td input[type="text"] {
+                        text-align: center;
+                    }
+
+                    table.listTable > thead > tr > th input[type="checkbox"],
+                    table.listTable > tbody > tr > td input[type="checkbox"] {
+                        cursor: pointer;
+                    }
+
+                    table.listTable > tbody > tr > td a.op {
+                        display: inline-block;
+                        margin-right: 8px;
+                        width: auto;
+                        height: 22px;
+                        padding: 0 8px;
+                        border: 1px #f1f1f1 solid;
+                        -moz-border-radius: 2px;
+                        -webkit-border-radius: 2px;
+                        border-radius: 2px;
+                        /*background: -moz-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#69b076), color-stop(100%,#4ca15b));
+                        background: -webkit-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: -o-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        border-color: #4ca15b;*/
+                        cursor: pointer;
+                        text-align: center;
+                        line-height: 22px;
+                        text-decoration: none;
+                        color: #333;
+                        font-size: 12px;
+                        font-weight: normal;
+                        text-decoration: none;
+                        letter-spacing: 2px;
+                    }
+
+                        table.listTable > tbody > tr > td a.op > i {
+                            /*margin-right: 4px;*/
+                            /*display: inline-block;*/
+                            width: 12px;
+                            height: 12px;
+                            font-size: 12px;
+                            color: #333;
+                        }
+
+                        table.listTable > tbody > tr > td a.op:hover {
+                            text-decoration: none;
+                            color: #ef705b;
+                            border-color: #ef705b;
+                        }
+
+                            table.listTable > tbody > tr > td a.op:hover > i {
+                                color: #ef705b;
+                            }
+
+/*table.listTable > tbody > tr > td a.op-blue {
+                        color: #389ebc;
+                        border-color: #389ebc;
+                    }
+
+                        table.listTable > tbody > tr > td a.op-blue > i {
+                            color: #389ebc;
+                        }*/
+
+/* 列表分页-页码容器 */
+.paging {
+    /*position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;*/
+    height: 39px;
+    border-top: 1px solid #c5c5c5;
+    background-color: #f8f8f8;
+}
+
+    .paging > ul {
+        position: relative;
+        padding: 0 10px;
+    }
+
+        .paging > ul > li {
+            height: 30px;
+        }
+
+            .paging > ul > li.txt {
+                float: left;
+                margin-top: 4px;
+                width: 250px;
+                text-align: left;
+                line-height: 30px;
+                color: #333;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+                .paging > ul > li.txt > b {
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: 500;
+                    margin: 0 5px;
+                }
+
+                .paging > ul > li.txt > i {
+                    position: relative;
+                    top: 1px;
+                    width: 16px;
+                    height: 16px;
+                    color: #666;
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin: 0 5px;
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+
+                    .paging > ul > li.txt > i.dis {
+                        color: #ccc;
+                    }
+
+            .paging > ul > li.size {
+                float: right;
+                margin-top: 4px;
+                width: 160px;
+                text-align: right;
+                line-height: 30px;
+                color: #333;
+                font-size: 12px;
+                font-weight: normal;
+            }
+
+                .paging > ul > li.size > select {
+                    width: 50px;
+                    margin: 0 5px;
+                }
+
+            .paging > ul > li.box {
+                position: absolute;
+                top: 4px;
+                left: 250px;
+                right: 160px;
+                text-align: center;
+                line-height: 30px;
+            }
+
+                .paging > ul > li.box > a,
+                .paging > ul > li.box > b {
+                    display: inline-block;
+                    padding: 0 8px;
+                    width: auto;
+                    min-width: 12px;
+                    height: 22px;
+                    border: 1px #d4d4d4 solid;
+                    background-color: transparent;
+                    cursor: pointer;
+                    text-align: center;
+                    line-height: 22px;
+                    color: #333;
+                    font-size: 12px;
+                    font-weight: normal;
+                    text-decoration: none;
+                }
+
+                    .paging > ul > li.box > a:hover {
+                        text-decoration: none;
+                        color: #ef705b;
+                    }
+
+                    .paging > ul > li.box > a.current {
+                        border: 1px #ef705b solid;
+                        color: #ef705b;
+                        font-weight: 600;
+                    }
+
+                .paging > ul > li.box > b {
+                    position: relative;
+                    top: -4px;
+                    border: none;
+                    height: 24px;
+                    /*font-weight: 600;*/
+                    cursor: default;
+                    line-height: 14px;
+                }
+
+.loading {
+    display: none;
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    right: 10px;
+    height: 40px;
+    border: 1px #ddd solid;
+    background: rgba(255, 255, 255, .9) url(/assets/images/gif/1s.gif) no-repeat 12px center;
+    padding-left: 32px;
+    text-align: left;
+    line-height: 40px;
+    color: #666;
+    font-size: 14px;
+    font-weight: normal;
+}

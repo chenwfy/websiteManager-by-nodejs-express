@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 系统菜单管理表单</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        var pageConfig = {
+            formData: { menuId: 0, parentId: 0, menuName: '', menuIcon: '', leftPage: '', rightPage: '', status: 1, sort: 10, menuRoles:[] },
+            menuId: parseInt($.queryString()['menuId'], 10),
+            parentId: parseInt($.queryString()['parentId'], 10)
+        };
+
+        $(function () {
+            loadData();
+            bindFormElements();
+        });
+
+        var bindFormElements = function () {
+            $('#txt_sort').setNumberField();
+            $('#btn_save').on('click', formSubmit);
+            $('#btn_reset').on('click', formReset);
+            $('#btn_close').on('click', winClose);
+            //选择图标
+            $('#btn_iconSelction').on('click', function () {
+                $.OpenWindow('./common/iconSelection.html', '选择图标', 1000, 600, function (data) {
+                    data && $('#txt_menuIcon').val(data) && $('#i_menuIcon').attr('class', data).show();
+                });
+            });
+        };
+
+        var loadData = function () {
+            var rolesRender = $('#td_roles');
+            $.ajaxPost('/service/coreUser/getAllRoles', null, function (json) {
+                var roles = json.data;
+                roles.length > 0 && $.each(roles, function (i, d) {
+                    $('<input>').attr({ 'type': 'checkbox', 'name': 'chk_menuInRoles', 'id': 'chk_menuInRoles_' + d.roleId, 'value': d.roleId }).appendTo(rolesRender);
+                    $('<label>').attr('for', 'chk_menuInRoles_' + d.roleId).html(d.roleDescription).appendTo(rolesRender);
+                });
+
+                loadFormData();
+            });
+        };
+
+        var loadFormData = function () {
+            if (pageConfig.menuId == 0) {
+                pageConfig.formData.parentId = pageConfig.parentId;
+                initForm();
+            } else {
+                var getMenu = $.ajaxPost('/service/coreMenu/getMenu', { menuId: pageConfig.menuId }),
+                    menuRole = $.ajaxPost('/service/coreMenu/getMenuRoles', { menuId: pageConfig.menuId });
+
+                $.when(getMenu, menuRole).done(function (menu, menuRoles) {
+                    pageConfig.formData = menu[0].data;
+                    pageConfig.formData.menuRoles = menuRoles[0].data;
+                    initForm();
+                });
+            }
+        };
+
+        var initForm = function () {
+            var data = pageConfig.formData;
+            $('#txt_menuId').val(data.menuId);
+            $('#txt_parentId').val(data.parentId);
+            $('#txt_menuName').val(data.menuName);
+            $('#txt_menuIcon').val(data.menuIcon);
+            $('#txt_leftPage').val(data.leftPage);
+            $('#txt_rightPage').val(data.rightPage);
+            $('input[type=radio][name=radio_status][value=' + data.status + ']').prop('checked', true);
+            $('#txt_sort').val(data.sort);
+
+            //图标
+            var iconEl = $('#i_menuIcon').hide();
+            data.menuIcon && iconEl.addClass(data.menuIcon).show();
+
+            //角色
+            $('#td_roles > input[type=checkbox][name=chk_menuInRoles]').each(function (idx, el) {
+                var _val = parseInt($(el).attr('value'), 10);
+                $(el).prop('checked', data.menuRoles.indexOf(_val) >= 0);
+            });
+        };
+
+        var formSubmit = function () {
+            var _menuId = parseInt($('#txt_menuId').val(), 10),
+                _parentId = parseInt($('#txt_parentId').val(), 10),
+                _menuName = $('#txt_menuName').val().Trim();
+            if (_menuName == '') {
+                $.Alert('菜单名称不能为空！');
+                return;
+            }
+
+            var _menuIcon = $('#txt_menuIcon').val().Trim(),
+                _leftPage = $('#txt_leftPage').val().Trim(),
+                _rightPage = $('#txt_rightPage').val().Trim(),
+                _status = parseInt($('input[type=radio][name=radio_status]:checked').attr('value'), 10),
+                _sort = parseInt($('#txt_sort').val().replace(/[^0-9]/, '').Trim(), 10),
+                _roleIds = [];
+
+            $('#td_roles > input[type=checkbox][name=chk_menuInRoles]:checked').each(function (idx, el) {
+                _roleIds.push(parseInt($(el).attr('value'), 10));
+            });
+
+            $.ajaxPost('/service/coreMenu/saveMenu', {
+                menuId: _menuId,
+                parentId: _parentId,
+                menuName: _menuName,
+                menuIcon: _menuIcon,
+                leftPage: _leftPage,
+                rightPage: _rightPage,
+                status: _status,
+                sort:_sort,
+                roleIds: _roleIds
+            }, function () {
+                $.Success('操作成功！', {
+                    title: '操作结果提示',
+                    callback: function () {
+                        window.top.FWK.LeftFrameWindow() && window.top.FWK.LeftFrameWindow().sideMenu.tree.refresh();
+                        window.top.FWK.MainFrameWindow() && window.top.FWK.MainFrameWindow().grid && window.top.FWK.MainFrameWindow().grid.refresh();
+                        winClose();
+                    }
+                });
+            });
+        }
+
+        var formReset = function () {
+            initForm();
+        };
+
+        var winClose = function () {
+            window.top.dialog.close();
+        };
+    </script>
+</head>
+<body>    
+    <div class="wrap fixed-wrap">
+        <table class="formTable" border="0" cellpadding="0" cellspacing="1">
+            <tbody>
+                <tr>
+                    <td class="td-31">菜单名称：</td>
+                    <td class="td-32">
+                        <input id="txt_menuName" name="txt_menuName" type="text" value="" maxlength="20">
+                        <input id="txt_menuId" name="txt_menuId" type="hidden" value="0">
+                        <input id="txt_parentId" name="txt_parentId" type="hidden" value="0">
+                    </td>
+                    <td class="td-33"><s>*</s>菜单名称，20字以内</td>
+                </tr>
+                <tr>
+                    <td class="td-31">菜单图标：</td>
+                    <td class="td-32">
+                        <input id="txt_menuIcon" name="txt_menuIcon" type="hidden" value="">
+                        <i id="i_menuIcon" style="display: none; width: 16px; height: 16px; font-size: 16px;"></i>
+                        <button id="btn_iconSelction">选择图标</button>
+                    </td>
+                    <td class="td-33">请选择菜单图标</td>
+                </tr>
+                <tr>
+                    <td class="td-31">左侧页面：</td>
+                    <td class="td-32">
+                        <input id="txt_leftPage" name="txt_leftPage" type="text" value="" maxlength="255">
+                    </td>
+                    <td class="td-33">请设置菜单左侧打开页面URL</td>
+                </tr>
+                <tr>
+                    <td class="td-31">右侧页面：</td>
+                    <td class="td-32">
+                        <input id="txt_rightPage" name="txt_rightPage" type="text" value="" maxlength="255">
+                    </td>
+                    <td class="td-33">请设置菜单右侧打开页面</td>
+                </tr>
+                <tr>
+                    <td class="td-31">是否启用：</td>
+                    <td class="td-32">
+                        <input id="radio_status_1" name="radio_status" type="radio" value="1">
+                        <label for="radio_status_1">启用</label>
+                        <input id="radio_status_0" name="radio_status" type="radio" value="0">
+                        <label for="radio_status_0">禁用</label>
+                    </td>
+                    <td class="td-33">请设置菜单启用状态</td>
+                </tr>
+                <tr>
+                    <td class="td-31">角色归属：</td>
+                    <td class="td-32" id="td_roles"></td>
+                    <td class="td-33">请选择菜单图标</td>
+                </tr>
+                <tr>
+                    <td class="td-31">菜单排序：</td>
+                    <td class="td-32">
+                        <input id="txt_sort" name="txt_sort" type="text" value="" maxlength="4">
+                    </td>
+                    <td class="td-33">请设置菜单排序码，降序排列</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-options">
+        <button class="blue" id="btn_save">
+            <i class="icon-Awesome-check"></i>
+            确定
+        </button>
+        <button id="btn_reset">
+            <i class="icon-Awesome-undo"></i>
+            重置
+        </button>
+        <button id="btn_close">
+            <i class="icon-Awesome-close"></i>
+            关闭
+        </button>
+    </div>
+</body>
+</html>

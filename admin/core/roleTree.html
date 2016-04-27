@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 管理员用户角色管理树</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/sideMenu.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/sideMenu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var treeRoot = $('.treeRoot > ul');
+            buildTree(treeRoot);
+            //根节点事件绑定
+            $('a.root').on('click', function (e) {
+                window.top.FWK.MainFrameWindow().location.href = 'roleList.html';
+                $('.active').removeClass('active');
+                !$(this).hasClass('active') && $(this).addClass('active');
+            });
+        });
+
+        var loaderUrl = '/service/coreUser/getAllRoles',
+            dataKeys = { 'nodeText': 'allName', 'hasSubNode': 0 };
+
+        var buildTree = function (render) {
+            $.ajaxPost(loaderUrl, function (json) {
+                var menuData = json.data,
+                    menuIcon = '/res/icons/group.png',
+                    nodeEvent = null,
+                    textEvent = function () { window.top.FWK.MainFrameWindow().location.href = 'roleUsersList.html?roleId=' + this.roleId + '&roleName=' + this.roleName + '&roleDesc=' + this.roleDescription; };
+
+                for (var d in menuData) {
+                    menuData[d].allName = menuData[d].roleDescription + '(' + menuData[d].roleName + ')';
+                }
+                sideMenu.tree.build(menuData, dataKeys, render, menuIcon, nodeEvent, textEvent);
+            });
+        };
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="treeRoot">
+            <a href="javascript:void(0);" class="root" title="点击查看所有管理员用户角色">管理员用户角色管理</a>
+            <ul>
+                <li class="loading">加载中，请稍后……</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

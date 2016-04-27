@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 右侧框架实例页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/lib/autosize.js"></script>
+    <style type="text/css">
+        h1 {
+            height: 36px;
+            line-height: 36px;
+            padding-left: 10px;
+            text-align: left;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        p {
+            height: auto;
+            line-height: 30px;
+            padding-left: 10px;
+            text-align: left;
+            color: #787878;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+            p > label {
+                color: #666;
+                font-weight: 600;
+            }
+
+            p > code {
+                display: block;
+                background-color: #f4f4f4;
+                padding: 16px;
+                text-align: left;
+                color: #787878;
+            }
+
+                p > code > i {
+                    color: #044f26;
+                    margin-left: 160px;
+                }
+
+            p > textarea {
+                padding: 4px;
+                height: auto;
+                max-height: 600px;
+                background-color: #f7f7f7;
+                overflow-y: visible;
+                text-align: left;
+                line-height: 24px;
+                color: #333;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            autosize(document.querySelectorAll('textarea'));
+        });
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-info-circle"></i>
+                <label>UI组件 - 对话框 - Toast组件说明</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap">
+        <h1>示例1 - 默认:</h1>
+        <p>
+            <textarea id="txt_jsCode_example_1">
+$.Toast('这个是一个Toast提示', {
+    callback: function () { alert('时间到'); }
+});
+            </textarea>
+            <br>
+            <button id="btn_run_example_1" class="blue" style="position: relative; top: 2px;">修改并运行示例</button>
+            <script type="text/javascript">
+                $('#btn_run_example_1').on('click', function () {
+                    var jsCode = $('#txt_jsCode_example_1').val();
+                    eval(jsCode);
+                });
+            </script>
+        </p>
+        <h1>示例2 - 自定义:</h1>
+        <p>
+            <textarea id="txt_jsCode_example_2">
+$.Toast('我现在正在做一些耗时的异步操作', {
+    showTime: 0, //将显示时间设定为0
+    callback: function () {
+        //此时this为toast弹层对象本身
+        var toastor = this;
+        //用window.setTimeout来模拟ajax等耗时的异步操作
+        window.setTimeout(function () {
+            toastor.css({ 'line-height': '24px' }).html('我操作完成了，但是结果很长，会换行！然后显示3秒钟后自动消失！');
+            window.setTimeout(function () {
+                toastor.hide().remove();
+            }, 3000);
+        }, 2000);
+    }
+});
+            </textarea>
+            <br>
+            <button id="btn_run_example_2" class="blue" style="position: relative; top: 2px;">修改并运行示例</button>
+            <script type="text/javascript">
+                $('#btn_run_example_2').on('click', function () {
+                    var jsCode = $('#txt_jsCode_example_2').val();
+                    eval(jsCode);
+                });
+            </script>
+        </p>
+    </div>
+</body>
+</html>

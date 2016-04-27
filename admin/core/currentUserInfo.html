@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 当前登录用户个人信息管理表单</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            loadData();
+            bindFormElements();
+        });
+
+        var bindFormElements = function () {
+            $('#txt_mobile').setNumberField();
+            $('#btn_save').on('click', formSubmit);
+        };
+
+        var loadData = function () {
+            $.ajaxPost('/service/coreUser/getCurrentUserInfo', null, function (json) {
+                initForm(json.data);
+            });
+        };
+
+        var initForm = function (data) {
+            $('#txt_realName').val(data['realName']);
+            $('#txt_email').val(data['email']);
+            $('#txt_mobile').val(data['mobile']);
+            $('#txt_comment').val(data['comment']);
+        };
+
+        var formSubmit = function () {
+            var _realName = $('#txt_realName').val().Trim(),
+                _email = $('#txt_email').val().Trim(),
+                _mobile = $('#txt_mobile').val().replace(/[^0-9]/, '').Trim(),
+                _comment = $('#txt_comment').val().Trim();
+
+            $.ajaxPost('/service/coreUser/saveCurrentUserInfo', {
+                realName: _realName,
+                email: _email,
+                mobile: _mobile,
+                comment: _comment
+            }, function () {
+                $.Success('个人信息修改成功！', {
+                    title: '操作结果提示',
+                    //callback: function () {
+                    //    window.top.location.reload();
+                    //}
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="main-nav">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-info"></i>
+                <label>修改个人信息</label>
+            </li>            
+        </ul>
+    </div>
+    
+    <div class="wrap">
+        <table class="formTable" border="0" cellpadding="0" cellspacing="1">
+            <tbody>                                
+                <tr>
+                    <td class="td-31">真实姓名：</td>
+                    <td class="td-32">
+                        <input id="txt_realName" name="txt_realName" type="text" value="" maxlength="16">
+                    </td>
+                    <td class="td-33">用户真实姓名，16字以内</td>
+                </tr>
+                <tr>
+                    <td class="td-31">电子邮件：</td>
+                    <td class="td-32">
+                        <input id="txt_email" name="txt_email" type="text" value="" maxlength="50">
+                    </td>
+                    <td class="td-33">用户联系电子邮件</td>
+                </tr>
+                <tr>
+                    <td class="td-31">手机号码：</td>
+                    <td class="td-32">
+                        <input id="txt_mobile" name="txt_mobile" type="text" value="" maxlength="11">
+                    </td>
+                    <td class="td-33">用户联系手机号码</td>
+                </tr>
+                <tr>
+                    <td class="td-31">用户描述：</td>
+                    <td class="td-32">
+                        <input id="txt_comment" name="txt_comment" type="text" value="" maxlength="50">
+                    </td>
+                    <td class="td-33">用户描述，50字以内</td>
+                </tr>
+                <tr>
+                    <td class="td-31 center" colspan="3" style="height: 64px;">
+                        <button class="blue" id="btn_save">
+                            <i class="icon-Awesome-check"></i>
+                            保存
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

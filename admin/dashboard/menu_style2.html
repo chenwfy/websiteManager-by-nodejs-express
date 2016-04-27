@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 右侧框架实例页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <link href="/assets/css/dist/datePicker.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btn_formWindow').on('click', function () {
+                $.OpenWindow('./dashboard/mainTest.html?parentId=0&menuId=19', '弹出表单窗口', 800, 336);
+            });
+
+            $('#btn_treeWindow').on('click', function () {
+                $.OpenWindow('./dashboard/treeTest.html', '弹出树形多选菜单窗口', 800, 400);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-list-ul"></i>
+                <label>UI组件 - 树形菜单说明</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap" id="op_formWindow" style="text-align: left; margin-left: 8px;">
+        <button id="btn_formWindow" style="position: relative; top: 2px;">弹出表单窗口 - 采用vue.js简化表单代码示例</button>
+    </div>
+
+    <div class="wrap" id="op_treeWindow" style="text-align: left; margin-left: 8px;">
+        <button id="btn_treeWindow" style="position: relative; top: 2px;">弹出树形多选菜单窗口</button>
+    </div>
+</body>
+</html>

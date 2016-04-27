@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 右侧框架实例页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <link href="/assets/css/dist/datePicker.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#btn_fileSelection').on('click', function () {
+                //window.top.UploadRoot --> 后台配置的上传文件的根目录
+                //fileType --> 可配置类型参见：/utilities/fileTypeFilter.js 该文件和后台公用
+                $.FileView('./common/fileView.html?root=' + window.top.UploadRoot + '/image/1&fileType=Images', '选择文件', 800, 440, function (file) {
+                    file && $('#txt_testFile').val(file);
+                });
+            });
+
+            $('#txt_testFile').picurePreview();
+
+            $('#txt_testDate_1').on('click', function (e) {
+                var options = {
+                    elment: $('#txt_testDate_1'),
+                    model: 'picker',            //render
+                    rangeMin: '',
+                    rangeMax: $('#txt_testDate_2'),
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    pickHandler: null
+                };
+                window.top.datePicker(options, window, e);
+            });
+
+            $('#txt_testDate_2').on('click', function (e) {
+                var options = {
+                    elment: $('#txt_testDate_2'),
+                    model: 'picker', 
+                    rangeMin: $('#txt_testDate_1'),
+                    rangeMax: '',
+                    format: 'yyyy-MM-dd HH:mm:ss',
+                    pickHandler: null
+                };
+                window.top.datePicker(options, window, e);
+            });
+
+            //renderDatePcier();
+
+            $('#btn_openWindow').on('click', function () {
+                $.OpenWindow('./dashboard/mainRight.html');
+            });
+
+            //alert((1460689838234).ToLocaleDateString('yyyy-MM-dd HH:mm:ss'));
+
+            $('#btn_formWindow').on('click', function () {
+                $.OpenWindow('./dashboard/mainTest.html?parentId=0&menuId=19', '弹出表单窗口', 800, 336);
+            });
+
+            $('#btn_treeWindow').on('click', function () {
+                $.OpenWindow('./dashboard/treeTest.html', '弹出树形多选菜单窗口', 800, 400);
+            });
+        });
+
+        var renderDatePcier = function () {
+            var options = {
+                elment: $('#div_dateRenedr'),
+                model: 'render', 
+                rangeMin: new Date().DateAdd('d', -3).Format('yyyy-MM-dd HH:mm:ss'),
+                rangeMax: new Date().DateAdd('d', 3).Format('yyyy-MM-dd HH:mm:ss'),
+                format: 'yyyy-MM-dd HH:mm:ss',
+                pickHandler: function (date) {
+                    alert(date);
+                }
+            };
+            window.top.datePicker(options, window, null);
+        };
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-list-ul"></i>
+                <label>右侧框架实例页面</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap" id="tableList" style="text-align: left;">
+        <input class="image-picker" type="text" name="txt_testFile" id="txt_testFile" value="" readonly maxlength="255" style="width: 500px; padding: 2px;">
+        <button id="btn_fileSelection" style="position: relative; top: 2px;">选择文件</button>
+    </div>
+
+    <div class="wrap" id="tableList" style="text-align: left; margin-top: 16px;">
+        <input class="date-picker" type="text" name="txt_testDate_1" id="txt_testDate_1" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+        -
+        <input class="date-picker" type="text" name="txt_testDate_2" id="txt_testDate_2" value="" readonly maxlength="255" style="width: 300px; padding: 2px;">
+    </div>
+    <div style="margin-left: 8px;" id="div_dateRenedr">
+
+    </div>
+
+    <div class="wrap" id="tableList" style="text-align: left; margin-left: 8px;">
+        <button id="btn_openWindow" style="position: relative; top: 2px;">弹出窗口</button>
+    </div>
+
+    <div class="wrap" id="imageUpload" style="text-align: left; margin-left: 8px;">
+        <input type="file" name="file" id="file" accept="image/*">
+    </div>
+    <div class="wrap" id="imagePreview" style="text-align: left; margin-left: 8px; width: 200px; height: 200px; border: 1px #e4e4e4 solid;">
+        
+    </div>
+
+    <script type="text/javascript">
+        $('#file').on('change', function () {
+            var selectionVal = $(this).val().Trim();
+            if (selectionVal && selectionVal != '') {
+                if (!selectionVal.match(/.jpg|.gif|.png|.bmp/i)) {
+                    $.Alert('请正确选择图片文件！');
+                    return false;
+                }
+
+                //此处不考虑IE7和IE6;
+                var domEl = $(this)[0], url = null;
+                if ($.Browser.IE9 || $.Browser.IE8) {
+                    try {
+                        domEl.select();
+                        domEl.blur();
+                        url = document.selection.createRange().text;
+                        document.selection.empty();
+                        if (url) {
+                            var filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true,sizingMethod=scale,src=\'' + url + '\')';
+                            $('#imagePreview').html('<div style="width: 190px; height: 190px; margin: 5px; filter:' + filter + '"></div>');
+                        }
+                    } catch (e) { }
+                } else {
+                    var createObj = window.createObjectURL || window.URL.createObjectURL || window.webkitURL.createObjectURL;
+                    if (createObj) {
+                        url = createObj(domEl.files[0]);
+                        url && $('#imagePreview').html('<img src="' + url + '" style="width: 190px; height: 190px; margin: 5px;">');
+                    }
+                }
+            } 
+        });
+    </script>
+
+    <div class="wrap" id="op_formWindow" style="text-align: left; margin-left: 8px;">
+        <button id="btn_formWindow" style="position: relative; top: 2px;">弹出表单窗口</button>
+    </div>
+
+    <div class="wrap" id="op_treeWindow" style="text-align: left; margin-left: 8px;">
+        <button id="btn_treeWindow" style="position: relative; top: 2px;">弹出树形多选菜单窗口</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 首页</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/framework.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <link href="/assets/css/dist/dialog.css" rel="stylesheet">
+    <link href="/assets/css/dist/datePicker.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/lib/jquery.drag.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/framework.js"></script>
+    <script src="/assets/js/dist/dialog.js"></script>
+    <script src="/assets/js/dist/datePicker.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            initFramework();
+            loadData();
+        });
+
+        var initFramework = function () {
+            var fwkConfig = { MenuKey: { id: 'menuId', title: 'menuName', icon: 'menuIcon', link: 'menuLink', leftUrl: 'leftPage', rightUrl: 'rightPage', childRen: 'childRen', neverClosed: 'neverClosed' } };
+            var FWK = window.FWK = new Framework(fwkConfig);
+            FWK.Build();
+        };
+
+        var loadData = function () {
+            var loadUser = $.ajaxPost('/service/coreUser/getCurrent'),
+                loadMenu = $.ajaxPost('/service/coreMenu/getMenus'),
+                loadUploadConfig = $.ajaxPost('/service/fileView/getUploadRoot'),
+                userDropdownData = [
+                    { menuId: 0, menuName: '个人信息', menuIcon: 'icon-Awesome-user', leftPage: './core/currentUserNavi.html', rightPage: './core/currentUserInfo.html' },
+                    { menuId: 0, menuName: '退出登录', menuIcon: 'icon-Awesome-remove', menuLink: '/logout' }
+                ],
+                userDesktop = { menuId: 0, menuName: '框架说明', menuIcon: 'icon-Awesome-home', leftPage: './dashboard/mainLeft.html', rightPage: './dashboard/framework.html', neverClosed: true };
+
+            $.when(loadUser, loadMenu, loadUploadConfig).done(function (user, menus, uploaderConfig) {
+                FWK.BindHeaderExtendHandle(function () {
+                    buildHeaderExtend(this, user[0].data, userDropdownData, null, null, FWK);
+                });
+                FWK.OpenTab(userDesktop);
+                FWK.BuildMenu(menus[0].data);
+                var UploadRoot = window.UploadRoot = uploaderConfig[0].data;
+            });
+        };
+
+        var buildHeaderExtend = function (render, userInfo, dropdownData, newNoticeCount, noticePage, frame) {
+            var noticeEl, notifyHeader, notifyDropdown;
+            if (userInfo) {
+                var userIcon = '<img src="' + (userInfo.headIcon || '/assets/images/icons/defaultIcon.png') + '" alt="">',
+                    userHtml = '<a href="javascript:void(0);">' + userIcon + '<label>你好, ' + userInfo.realName + '</label><span></span></a>',
+                    userEl = $('<li>').addClass('userInfo').append(userHtml).appendTo(render);
+
+                if (dropdownData && dropdownData.length > 0) {
+                    var dropdownRender = $('<ul>').addClass('dropdown-user').appendTo(userEl);
+                    $.each(dropdownData, function (idx, el) {
+                        (function (idx, el) {
+                            var ddRow = $('<li>').appendTo(dropdownRender);
+                            var ddEle = $('<a>').attr('href', el.menuLink ? el.menuLink : 'javascript:void(0);').appendTo(ddRow);
+                            el.menuIcon && $('<i>').addClass(el.menuIcon).appendTo(ddEle);
+                            el.menuName && $('<label>').html(el.menuName).appendTo(ddEle);
+                            if (el.bindNotify && !notifyDropdown) {
+                                notifyDropdown = $('<span>').html(newNoticeCount > 9 ? '9+' : newNoticeCount).appendTo(ddEle);
+                                newNoticeCount == 0 && notifyDropdown.hide();
+                            }
+                            (!!!el.menuLink) && ddEle.on('click', function () {
+                                if (el.bindNotify) {
+                                    if (noticeEl && noticeEl.length > 0) {
+                                        noticeEl.click();
+                                    } else {
+                                        frame.OpenTab(el);
+                                        notifyHeader && notifyHeader.hide();
+                                        notifyDropdown && notifyDropdown.hide();
+                                    }
+                                } else {
+                                    frame.OpenTab(el);
+                                }
+                                dropdownRender.hide();
+                            });
+                        })(idx, el);
+                    });
+
+                    var enterTimer, leaveTimer;
+                    userEl.bind({
+                        'mouseenter': function () {
+                            enterTimer = window.setTimeout(function () {
+                                dropdownRender.slideDown(200);
+                            }, 250);
+                            leaveTimer && window.clearTimeout(leaveTimer);
+                        },
+                        'mouseleave': function () {
+                            leaveTimer = window.setTimeout(function () {
+                                dropdownRender.slideUp(200);
+                            }, 250);
+                            enterTimer && window.clearTimeout(enterTimer);
+                        }
+                    });
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>

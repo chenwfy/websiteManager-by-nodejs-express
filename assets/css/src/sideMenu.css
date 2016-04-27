@@ -1,0 +1,409 @@
+﻿/*
+=====================================================================================
+管理平台 - 左边子框架页面(通常为功能菜单列表)样式
+=====================================================================================
+*/
+
+body {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* 页面元素最外层容器 */
+.wrapper {
+    padding: 10px;
+}
+
+.loading {
+    height: 20px;
+    background: url(/assets/images/gif/1s.gif) no-repeat left center;
+    line-height: 20px;
+    text-align: left;
+    color: #666;
+    font-size: 12px;
+    padding-left: 20px;
+}
+
+/* 
+   功能菜单分两种呈现方式：
+   1：限定最多三级，平级状
+   2：无限级，树状
+*/
+
+
+/* 1：限定最多三级，平级状 */
+.levelRoot ul {
+    display: none;
+}
+
+.levelRoot > ul li {
+    text-align: left;
+}
+
+    .levelRoot > ul li > a {
+        display: block;
+        overflow: hidden;
+        height: 14px;
+        -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+    }
+
+        .levelRoot > ul li > a > i,
+        .levelRoot > ul li > a > label,
+        .levelRoot > ul li > a > span {
+            float: left;
+            display: block;
+            height: 100%;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .levelRoot > ul li > a > i {
+            width: 14px;
+            font-size: 14px;
+        }
+
+        .levelRoot > ul li > a > label {
+            max-width: 140px;
+            margin-left: 5px;
+            font-size: 12px;
+            line-height: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .levelRoot > ul li > a > span {
+            float: right;
+            width: 12px;
+        }
+
+/* 一级 */
+.levelRoot > ul > li {
+    margin-top: 1px;
+}
+
+    .levelRoot > ul > li:first-child {
+        margin-top: 0;
+    }
+
+    .levelRoot > ul > li > a {
+        padding: 12px 15px;
+        border: 1px solid #d5d5d5;
+        background: #f5f5f5;
+        background: -moz-linear-gradient(top, #fff 0%, #f5f5f5 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#f5f5f5));
+        background: -webkit-linear-gradient(top, #fff 0%,#f5f5f5 100%);
+        background: -o-linear-gradient(top, #fff 0%,#f5f5f5 100%);
+        background: linear-gradient(to bottom, #ffffff 0%,#f5f5f5 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f5f5f5',GradientType=0 );
+    }
+
+        .levelRoot > ul > li > a > i,
+        .levelRoot > ul > li > a > label {
+            color: #333;
+        }
+
+        .levelRoot > ul > li > a > span {
+            background: url(/assets/images/arrows/icon_small_arrow_right_g.png) no-repeat center center;
+        }
+
+        .levelRoot > ul > li > a:hover {
+            border-color: #ccc;
+            background: #fcfcfc;
+            filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+        }
+
+            .levelRoot > ul > li > a:hover > i,
+            .levelRoot > ul > li > a:hover > label {
+                color: #497b95;
+            }
+
+        .levelRoot > ul > li > a.active,
+        .levelRoot > ul > li > a.active:hover {
+            background: #5b9bb4;
+            border-color: #47869e;
+            box-shadow: 0 1px 1px rgba(255,255,255,0.3) inset;
+            -webkit-box-shadow: 0 1px 1px rgba(255,255,255,0.3) inset;
+            -moz-box-shadow: 0 1px 1px rgba(255,255,255,0.3) inset;
+            filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+        }
+
+            .levelRoot > ul > li > a.active > i,
+            .levelRoot > ul > li > a.active:hover > i,
+            .levelRoot > ul > li > a.active > label,
+            .levelRoot > ul > li > a.active:hover > label {
+                color: #fff;
+            }
+
+            .levelRoot > ul > li > a.active > span,
+            .levelRoot > ul > li > a.active:hover > span {
+                background: url(/assets/images/arrows/icon_small_arrow_right_w.png) no-repeat center center;
+            }
+
+        .levelRoot > ul > li > a.unfolded > span,
+        .levelRoot > ul > li > a.unfolded:hover > span {
+            background: url(/assets/images/arrows/icon_small_arrow_down_w.png) no-repeat center center;
+        }
+
+    /* 二级 */
+    .levelRoot > ul > li > ul {
+        margin-top: 1px;
+        background: #fff;
+    }
+
+        .levelRoot > ul > li > ul > li {
+            border: 1px solid #ddd;
+            border-top: none;
+        }
+
+            .levelRoot > ul > li > ul > li:first-child {
+                border-top: 1px solid #ddd;
+            }
+
+            .levelRoot > ul > li > ul > li > a {
+                padding: 10px 15px;
+                background: #fcfcfc;
+            }
+
+                .levelRoot > ul > li > ul > li > a > i,
+                .levelRoot > ul > li > ul > li > a > label {
+                    color: #666;
+                }
+
+                .levelRoot > ul > li > ul > li > a > i {
+                    background: url(/assets/images/icons/icon_plus.png) no-repeat center center;
+                }
+
+                .levelRoot > ul > li > ul > li > a > span {
+                    background: url(/assets/images/arrows/icon_small_arrow_right_g.png) no-repeat center center;
+                }
+
+                .levelRoot > ul > li > ul > li > a:hover {
+                    background: #fafafa;
+                    box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+                    -webkit-box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+                    -moz-box-shadow: -1px 0 0 #ef705b, 2px 0 0 #ef705b inset;
+                }
+
+                    .levelRoot > ul > li > ul > li > a:hover > label {
+                        color: #b14131;
+                    }
+
+                .levelRoot > ul > li > ul > li > a.active,
+                .levelRoot > ul > li > ul > li > a.active:hover {
+                    background-color: #fafafa;
+                    box-shadow: -1px 0 0 #b1b7bb, 2px 0 0 #b1b7bb inset;
+                    -webkit-box-shadow: -1px 0 0 #b1b7bb, 2px 0 0 #b1b7bb inset;
+                    -moz-box-shadow: -1px 0 0 #b1b7bb, 2px 0 0 #b1b7bb inset;
+                }
+
+                .levelRoot > ul > li > ul > li > a.unfolded > i,
+                .levelRoot > ul > li > ul > li > a.unfolded:hover > i {
+                    background: url(/assets/images/icons/icon_pluss.png) no-repeat center center;
+                }
+
+                .levelRoot > ul > li > ul > li > a.active > label,
+                .levelRoot > ul > li > ul > li > a.active:hover > label {
+                    color: #2883b8;
+                    font-weight: 600;
+                }
+
+                .levelRoot > ul > li > ul > li > a.unfolded > span,
+                .levelRoot > ul > li > ul > li > a.unfolded:hover > span {
+                    background: url(/assets/images/arrows/icon_small_arrow_down_g.png) no-repeat center center;
+                }
+
+            /* 三级 */
+            .levelRoot > ul > li > ul > li > ul {
+                box-shadow: 1px 0 0 #b1b7bb, 0 1px 0 #b1b7bb, 0 -1px 0 #b1b7bb;
+                -webkit-box-shadow: 1px 0 0 #b1b7bb, 0 1px 0 #b1b7bb, 0 -1px 0 #b1b7bb;
+                -moz-box-shadow: 1px 0 0 #b1b7bb, 0 1px 0 #b1b7bb, 0 -1px 0 #b1b7bb;
+            }
+
+                .levelRoot > ul > li > ul > li > ul > li {
+                    border-top: 1px solid #f2f2f2;
+                }
+
+                    .levelRoot > ul > li > ul > li > ul > li:first-child {
+                        border-top: none;
+                    }
+
+                    .levelRoot > ul > li > ul > li > ul > li > a {
+                        padding: 10px 15px 10px 25px;
+                        background: #fcfcfc;
+                    }
+
+                        .levelRoot > ul > li > ul > li > ul > li > a > i,
+                        .levelRoot > ul > li > ul > li > ul > li > a > label {
+                            color: #787878;
+                        }
+
+                        .levelRoot > ul > li > ul > li > ul > li > a > i {
+                            background: url(/assets/images/icons/icon_plus.png) no-repeat center center;
+                        }
+
+                        .levelRoot > ul > li > ul > li > ul > li > a:hover {
+                            background-color: #fdfdfd;
+                        }
+
+                            .levelRoot > ul > li > ul > li > ul > li > a:hover label {
+                                color: #b14131;
+                            }
+
+                        .levelRoot > ul > li > ul > li > ul > li > a.active,
+                        .levelRoot > ul > li > ul > li > ul > li > a.active:hover {
+                            background-color: #fdfdfd;
+                        }
+
+                            .levelRoot > ul > li > ul > li > ul > li > a.active > label,
+                            .levelRoot > ul > li > ul > li > ul > li > a.active:hover > label {
+                                color: #b14131;
+                                font-weight: 600;
+                            }
+
+/* 2：无限级，树状 */
+.treeRoot > a.root {
+    display: block;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    color: #333;
+    font-size: 12px;
+    padding-left: 24px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url(/assets/images/treeNode/tree_root.gif);
+    cursor: pointer;
+}
+
+    .treeRoot > a.root:hover {
+        color: #787878;
+    }
+
+.treeRoot > a.active {
+    color: #ef705b;
+}
+
+.treeRoot ul > li:not(.loading) {
+    background: url(/assets/images/treeNode/tree_d.png) repeat-y left top;
+}
+
+.treeRoot > ul > li ul {
+    margin-left: 20px;
+}
+
+.treeRoot > ul > li:not(.loading):first-child {
+    background: url(/assets/images/treeNode/tree_r_rd.png) no-repeat left top, url(/assets/images/bgs/main_s.png) no-repeat left top, url(/assets/images/treeNode/tree_d.png) repeat-y left top;
+}
+
+.treeRoot ul > li:not(.loading):last-child {
+    background: url(/assets/images/treeNode/tree_r_ur.png) no-repeat left top, url(/assets/images/bgs/main_s.png) no-repeat left top;
+}
+
+.treeRoot ul > li > div {
+    cursor: pointer;
+}
+
+    .treeRoot ul > li > div > i {
+        float: left;
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: left top;
+        cursor: pointer;
+    }
+
+.treeRoot ul li > div > i.folder {
+    background-image: url(/assets/images/treeNode/tree_c_urd.png);
+}
+
+.treeRoot ul > li:first-child > div > i.folder {
+    background-image: url(/assets/images/treeNode/tree_c_rd.png);
+}
+
+.treeRoot ul > li:last-child > div > i.folder {
+    background-image: url(/assets/images/treeNode/tree_c_ur.png);
+}
+
+.treeRoot ul > li > div > i.unfolder {
+    background-image: url(/assets/images/treeNode/tree_o_urd.png);
+}
+
+.treeRoot ul > li:first-child > div > i.unfolder {
+    background-image: url(/assets/images/treeNode/tree_o_rd.png);
+}
+
+.treeRoot ul > li:last-child > div > i.unfolder {
+    background-image: url(/assets/images/treeNode/tree_o_ur.png);
+}
+
+.treeRoot ul > li > div > i.single {
+    /*background-image: url(/assets/images/treeNode/tree_r_rd.png);*/
+    background-image: url(/assets/images/treeNode/tree_r_ur.png);
+}
+
+.treeRoot ul > li:last-child > div > i.single {
+    background-image: url(/assets/images/treeNode/tree_r_ur.png);
+}
+
+.treeRoot ul > li > div > p {
+    margin-left: 22px;
+    height: 20px;
+    line-height: 20px;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+    .treeRoot ul > li > div > p > img {
+        max-width: 16px;
+        max-height: 16px;
+        border: none;
+        margin-bottom: 2px;
+        cursor: pointer;
+    }
+
+    .treeRoot ul > li > div > p > span {
+        color: #333;
+        font-size: 12px;
+        margin-left: 4px;
+        cursor: pointer;
+    }
+
+        .treeRoot ul > li > div > p > span:hover {
+            color: #787878;
+        }
+
+        .treeRoot ul > li > div > p > span.active {
+            color: #ef705b;
+        }
+
+    .treeRoot ul > li > div > p > i.checkbox {
+        position: relative;
+        top: 3px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        background-repeat: no-repeat;
+        background-position: left top;
+    }
+
+    .treeRoot ul > li > div > p > i.check-all {
+        background-image: url(/assets/images/treeNode/checkbox_2.gif);
+    }
+
+    .treeRoot ul > li > div > p > i.check-portion {
+        background-image: url(/assets/images/treeNode/checkbox_3.gif);
+    }
+
+    .treeRoot ul > li > div > p > i.check-none {
+        background-image: url(/assets/images/treeNode/checkbox_1.gif);
+    }

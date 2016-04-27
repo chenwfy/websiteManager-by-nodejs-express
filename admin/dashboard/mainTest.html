@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 系统菜单管理表单</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/lib/vue.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        var pageQuery = $.queryString(),
+            queryMenuId = parseInt(pageQuery['menuId'], 10),
+            queryParentId = parseInt(pageQuery['parentId'], 10),
+            formData = { menuId: queryMenuId, parentId: queryParentId, menuName: '', menuIcon: '', leftPage: '', rightPage: '', status: 1, sort: 10 },
+            vm = null;
+
+        $(function () {
+            $('#txt_sort').setNumberField();
+            $('#btn_save').on('click', formSubmit);
+            //$('#btn_reset').on('click', formReset);
+            $('#btn_close').on('click', winClose);
+
+            initVueBind();
+            loadRoles();
+        });
+
+        var initVueBind = function (roles) {
+            vm = new Vue({
+                el: '#div_form',
+                data: {
+                    formData: formData,
+                    menuInRoles: [],
+                    roles:[]
+                },
+                methods: {
+                    roleChanged: function (e) {
+                        var render = $(e.target).parent(),
+                            seleds = [];
+                        render.find('input[type=checkbox]:checked').each(function (n, c) {
+                            seleds.push(parseInt($(c).attr('value'), 10));
+                        });
+
+                        this.menuInRoles = seleds;
+                    }
+                }
+            });
+        };
+
+        var loadRoles = function () {
+            $.ajaxPost('/service/coreUser/getAllRoles', null, function (json) {
+                vm.$data.roles = json.data;
+                queryMenuId > 0 && loadFormData();
+            });
+        };
+
+        var loadFormData = function () {
+            var getMenu = $.ajaxPost('/service/coreMenu/getMenu', { menuId: queryMenuId }),
+                menuRole = $.ajaxPost('/service/coreMenu/getMenuRoles', { menuId: queryMenuId });
+
+            $.when(getMenu, menuRole).done(function (menu, menuRoles) {
+                formData = menu[0].data;
+                vm.$data.formData = formData;
+
+                var mInRoles = menuRoles[0].data;
+                for (var i in mInRoles) {
+                    $('#chk_role_' + mInRoles[i]).click();
+                }
+            });
+        };
+
+        var formSubmit = function () {
+            formData.roles = vm.$data.menuInRoles;
+            alert(JSON.stringify(formData));
+        }
+
+        var winClose = function () {
+            window.top.dialog.close();
+        };
+    </script>
+</head>
+<body>
+    <div class="wrap fixed-wrap" id="div_form">
+        <table class="formTable" border="0" cellpadding="0" cellspacing="1">
+            <tbody>
+                <tr>
+                    <td class="td-31">菜单名称：</td>
+                    <td class="td-32">
+                        <input id="txt_menuName" name="txt_menuName" type="text" value="" maxlength="20" v-model="formData.menuName">
+                        <input id="txt_menuId" name="txt_menuId" type="hidden" value="0" v-model="formData.menuId">
+                        <input id="txt_parentId" name="txt_parentId" type="hidden" value="0" v-model="formData.parentId">
+                    </td>
+                    <td class="td-33"><s>*</s>菜单名称，20字以内</td>
+                </tr>
+                <tr>
+                    <td class="td-31">菜单图标：</td>
+                    <td class="td-32">
+                        <input id="txt_menuIcon" name="txt_menuIcon" type="hidden" value="" v-model="formData.menuIcon">
+                        <i id="i_menuIcon" style="display: none; width: 16px; height: 16px; font-size: 16px;"></i>
+                        <button id="btn_iconSelction">选择图标</button>
+                    </td>
+                    <td class="td-33">请选择菜单图标</td>
+                </tr>
+                <tr>
+                    <td class="td-31">左侧页面：</td>
+                    <td class="td-32">
+                        <input id="txt_leftPage" name="txt_leftPage" type="text" value="" maxlength="255" v-model="formData.leftPage">
+                    </td>
+                    <td class="td-33">请设置菜单左侧打开页面URL</td>
+                </tr>
+                <tr>
+                    <td class="td-31">右侧页面：</td>
+                    <td class="td-32">
+                        <input id="txt_rightPage" name="txt_rightPage" type="text" value="" maxlength="255" v-model="formData.rightPage">
+                    </td>
+                    <td class="td-33">请设置菜单右侧打开页面</td>
+                </tr>
+                <tr>
+                    <td class="td-31">是否启用：</td>
+                    <td class="td-32">
+                        <input id="radio_status_1" name="radio_status" type="radio" value="1" v-model="formData.status">
+                        <label for="radio_status_1">启用</label>
+                        <input id="radio_status_0" name="radio_status" type="radio" value="0" v-model="formData.status">
+                        <label for="radio_status_0">禁用</label>
+                    </td>
+                    <td class="td-33">请设置菜单启用状态</td>
+                </tr>
+                <tr>
+                    <td class="td-31">角色归属：</td>
+                    <td class="td-32">
+                        <template v-for="role in roles">
+                            <input type="checkbox" name="chk_role" id="chk_role_{{ role.roleId }}" value="{{ role.roleId }}" v-on:click="roleChanged">
+                            <label for="chk_role_{{ role.roleId }}">{{ role.roleDescription }}</label>
+                        </template>
+                    </td>
+                    <td class="td-33">请选择菜单图标</td>
+                </tr>
+                <tr>
+                    <td class="td-31">菜单排序：</td>
+                    <td class="td-32">
+                        <input id="txt_sort" name="txt_sort" type="text" value="" maxlength="4" v-model="formData.sort">
+                    </td>
+                    <td class="td-33">请设置菜单排序码，降序排列</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-options">
+        <button class="blue" id="btn_save">
+            <i class="icon-Awesome-check"></i>
+            确定
+        </button>
+        <!--<button id="btn_reset">
+            <i class="icon-Awesome-undo"></i>
+            重置
+        </button>-->
+        <button id="btn_close">
+            <i class="icon-Awesome-close"></i>
+            关闭
+        </button>
+    </div>
+</body>
+</html>

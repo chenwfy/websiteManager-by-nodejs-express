@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 角色所属管理员用户列表</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/gridView.js"></script>
+    <script type="text/javascript">
+        var pageConfig = { pageName: 'roleUsersList', roleId: parseInt($.queryString()['roleId'], 10), roleName: $.queryString()['roleName'], roleDesc: $.queryString()['roleDesc'] },
+            listOptions = {
+                dataLoader: { url: '/service/coreUser/getUsersInRole', data: { roleId: pageConfig.roleId } },
+                tableRenderTo: 'tableList',
+                columns: [
+                    { columnName: '编号', dataIndex: 'userId', className: 'th5' },
+	                { columnName: '用户名', dataIndex: 'userName', className: 'th10' },
+                    { columnName: '真实姓名', dataIndex: 'realName', className: 'th15' },
+                    { columnName: '电子邮件', dataIndex: 'email', className: 'th15' },
+                    { columnName: '手机号码', dataIndex: 'mobile', className: 'th10' },
+                    { columnName: '描述', dataIndex: 'comment', className: 'th20' },
+                    { columnName: '状态', dataIndex: 'approved', className: 'th10', render: { '1': '<span class="sp12 spYes" title="已审核"></span>', '0': '<span class="sp12 spNo" title="未审核"></span>' } }, 
+                    { columnName: '操作', dataIndex: 'userId', className: 'th10', render: '<a href="javascript:void(0);" class="op" onclick="javascript:removeData({userId});"><i class="icon-Awesome-remove"></i>移除</a>' }
+                ]
+            },
+            grid = null;
+
+        $(function () {
+            grid = new gridView(listOptions);
+            grid.load();
+
+            $('#lb_tableTitle').html(pageConfig.roleDesc + '(' + pageConfig.roleName + ') 所属管理员用户列表');
+            bindButtons();
+        });
+
+        var bindButtons = function () {
+            $('#btn_addNew').on('click', function () {
+                modifyData(0);
+            });
+
+            $('#btn_delete').on('click', function () {
+                removeRow();
+            });
+        };
+
+        var modifyData = function (dataId) {
+            var title = '选择可导入角色的用户';
+            $.OpenWindow('./core/userToRoleList.html?roleId=' + pageConfig.roleId, title, 1000, 440);
+        };
+
+        var removeData = function (dataId) {
+            dataId && removeListData([dataId]);
+        };
+
+        var removeRow = function () {
+            var rows = grid.selectedRows('userId');
+            if (rows.length == 0) {
+                $.Alert("请选择需要删除的数据！");
+                return;
+            }
+            removeListData(rows);
+        };
+
+        var removeListData = function (rows) {
+            var funOK = function () {
+                $.ajaxPost('/service/coreUser/removeUsersFromRole', { roleId: pageConfig.roleId, userIds: rows }, function () {
+                    $.Success('操作成功！');
+                    grid.refresh();
+                });
+            };
+
+            $.Confirm('确定要移除用户吗？', { title: '操作确认', buttonOkClicked: funOK });
+        };
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-list-ul"></i>
+                <label id="lb_tableTitle">角色所属管理员用户列表</label>
+            </li>
+            <li class="button">
+                <button class="orange" id="btn_delete">
+                    <i class="icon-Awesome-remove"></i>
+                    移除用户
+                </button>                
+                <button class="blue" id="btn_addNew">
+                    <i class="icon-Awesome-plus"></i>
+                    导入用户
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap" id="tableList">
+
+    </div>
+</body>
+</html>

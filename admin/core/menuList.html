@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 系统菜单管理列表</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/gridView.js"></script>
+    <script type="text/javascript">
+        var pageConfig = { pageName: 'menuList', parentId: parseInt($.queryString()['menuId'], 10) },
+            listOptions = {
+                dataLoader: { url: '/service/coreMenu/getMenuList', data: { parentId: pageConfig.parentId } },
+                tableRenderTo: 'tableList',
+                rowSelection: true,
+                columns: [
+                    { columnName: '编号', dataIndex: 'menuId', className: 'th5' },
+	                { columnName: '名称', dataIndex: 'menuName', className: 'th10' },
+	                { columnName: '图标', dataIndex: 'menuIcon', className: 'th10', render: function () { return this ? '<i class="' + this + '"></i>' : ''; } },
+                    { columnName: '左侧地址', dataIndex: 'leftPage', className: 'th20' },
+	                { columnName: '右侧地址', dataIndex: 'rightPage', className: 'th20' },
+                    { columnName: '排序码', dataIndex: 'sort', className: 'th10', render: '<input type="text" value="{sort}" name="txt_menuOrder_{menuId}" id="txt_menuOrder_{menuId}" style="width:80px;">' },
+                    { columnName: '状态', dataIndex: 'status', className: 'th10', render: { '1': '<span class="sp12 spYes" title="可用"></span>', '0': '<span class="sp12 spNo" title="不可用"></span>' } },
+                    { columnName: '操作', dataIndex: 'menuId', className: 'th10', render: '<a href="javascript:void(0);" class="op" onclick="javascript:modifyData({menuId});"><i class="icon-Awesome-pencil"></i>修改</a><a href="javascript:void(0);" class="op" onclick="javascript:removeData({menuId});"><i class="icon-Awesome-remove"></i>删除</a>' }
+                ]
+            },
+            grid = null;
+
+        $(function () {
+            grid = new gridView(listOptions);
+            grid.load();
+
+            bindButtons();
+        });
+
+        var bindButtons = function () {
+            $('#btn_addNew').on('click', function () {
+                modifyData(0);
+            });
+
+            $('#btn_saveSort').on('click', function () {
+                setListSort();
+            });
+
+            $('#btn_enabled').on('click', function () {
+                setListStatus(true);
+            });
+
+            $('#btn_disenable').on('click', function () {
+                setListStatus(false);
+            });
+
+            $('#btn_delete').on('click', function () {
+                removeRow();
+            });
+        };
+
+        var modifyData = function (dataId) {
+            var parentId = pageConfig.parentId;
+            var title = dataId == 0 ? '新建菜单' : '编辑菜单';
+            $.OpenWindow('./core/menuAdd.html?menuId=' + dataId + '&parentId=' + parentId, title, 800, 336);
+        };
+
+        var setListSort = function () {
+            var rows = getSelectRows();
+            if (rows.length == 0) {
+                $.Alert("请选择需要设置的数据！");
+                return;
+            }
+
+            var sortNums = [];
+            $.each(rows, function (i, n) {
+                sortNums.push(parseInt($('#txt_menuOrder_' + n).val().replace(/[^0-9]/, ''), 10));
+            });
+
+            if (rows.length != sortNums.length) {
+                $.Alert("列表数据选择不正确！");
+                return;
+            }
+
+            $.ajaxPost('/service/coreMenu/setMenuSort', { menuIds: rows, sortNums: sortNums }, function () {
+                $.Success('操作成功！');
+                grid.refresh();
+            });
+        };
+
+        var setListStatus = function (status) {
+            var rows = getSelectRows();
+            if (rows.length == 0) {
+                $.Alert("请选择需要设置的数据！");
+                return;
+            }
+
+            $.ajaxPost('/service/coreMenu/setMenuStatus', { menuIds: rows, status: status ? 1 : 0 }, function () {
+                $.Success('操作成功！');
+                grid.refresh();
+            });
+        };
+
+        var removeData = function (dataId) {
+            dataId && removeListData([dataId]);
+        };
+
+        var removeRow = function () {
+            var rows = getSelectRows();
+            if (rows.length == 0) {
+                $.Alert("请选择需要删除的数据！");
+                return;
+            }
+            removeListData(rows);
+        };
+
+        var removeListData = function (rows) {
+            var funOK = function () {
+                $.ajaxPost('/service/coreMenu/removeMenu', { menuIds: rows }, function () {
+                    $.Success('操作成功！');
+                    window.top.FWK.LeftFrameWindow() && window.top.FWK.LeftFrameWindow().sideMenu.tree.refresh();
+                    grid.refresh();
+                });
+            };
+
+            $.Confirm('确定要进行删除操作吗？', { title: '操作确认', buttonOkClicked: funOK });
+        };
+
+        var getSelectRows = function () {
+            return grid.selectedRows('menuId');            
+        };
+    </script>
+</head>
+<body>
+    <div class="main-nav ">
+        <ul>
+            <li class="title">
+                <i class="icon-Awesome-list-ul"></i>
+                <label>子级菜单列表</label>
+            </li>
+            <li class="button">
+                <button class="orange" id="btn_delete">
+                    <i class="icon-Awesome-remove"></i>
+                    删除菜单
+                </button>
+                <button class="orange" id="btn_disenable">
+                    <i class="icon-Awesome-ban"></i>
+                    设为禁用
+                </button>
+                <button class="green" id="btn_enabled">
+                    <i class="icon-Awesome-check"></i>
+                    设为启用
+                </button>
+                <button class="blue" id="btn_saveSort">
+                    <i class="icon-Awesome-random"></i>
+                    保存排序
+                </button>
+                <button class="blue" id="btn_addNew">
+                    <i class="icon-Awesome-plus"></i>
+                    添加子菜单
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="wrap" id="tableList">
+
+    </div>
+</body>
+</html>

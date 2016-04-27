@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 管理员用户角色管理表单</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/main.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script type="text/javascript">
+        var pageConfig = { formData: { roleId: 0, foleName: '', foleDescription: '' }, roleId: parseInt($.queryString()['roleId'], 10) };
+
+        $(function () {
+            loadData();
+            bindFormElements();
+        });
+
+        var bindFormElements = function () {
+            $('#txt_roleName').setLetterField();
+
+            $('#btn_save').on('click', formSubmit);
+            $('#btn_reset').on('click', formReset);
+            $('#btn_close').on('click', winClose);
+        };
+
+        var loadData = function () {
+            pageConfig.roleId == 0 && initForm();
+            pageConfig.roleId > 0 && $.ajaxPost('/service/coreUser/getRole', { roleId: pageConfig.roleId }, function (json) {
+                pageConfig.formData = json.data;
+                initForm();
+            });
+        };
+
+        var initForm = function () {
+            var data = pageConfig.formData;
+            $('#txt_roleId').val(data['roleId']);
+            $('#txt_roleName').val(data['roleName']);
+            $('#txt_roleDescription').val(data['roleDescription']);
+        };
+
+        var formSubmit = function () {
+            var _roleId = $('#txt_roleId').val();
+            var _roleName = $('#txt_roleName').val().replace(/[^a-zA-Z]*/gi, '').Trim();
+            var _roleDesc = $('#txt_roleDescription').val().Trim();
+            if (!(/^[a-zA-Z]/).test(_roleName)) {
+                $.Alert('请检查角色名称：不能为空，并且只能以字母组成！');
+                return;
+            }
+            if (_roleDesc.length < 1) {
+                $.Alert('角色描述不能为空！');
+                return;
+            }
+            
+            $.ajaxPost('/service/coreUser/saveRole', { roleId: _roleId, roleName: _roleName, roleDescription: _roleDesc }, function () {
+                $.Success('操作成功！', {
+                    title: '操作结果提示',
+                    callback: function () {
+                        window.top.FWK.LeftFrameWindow() && window.top.FWK.LeftFrameWindow().sideMenu.tree.refresh();
+                        window.top.FWK.MainFrameWindow() && window.top.FWK.MainFrameWindow().grid && window.top.FWK.MainFrameWindow().grid.refresh();
+                        winClose();
+                    }
+                });
+            });
+        }
+
+        var formReset = function () {
+            initForm();
+        };
+
+        var winClose = function () {
+            window.top.dialog.close();
+        };
+    </script>
+</head>
+<body>
+    <div class="wrap fixed-wrap">
+        <table class="formTable" border="0" cellpadding="0" cellspacing="1">
+            <tbody>
+                <tr>
+                    <td class="td-31">角色名称：</td>
+                    <td class="td-32">
+                        <input id="txt_roleName" name="txt_roleName" type="text" value="" maxlength="16">
+                        <input id="txt_roleId" name="txt_roleId" type="hidden" value="0" />
+                    </td>
+                    <td class="td-33"><s>*</s>角色名称，16位以内英文字母组成</td>
+                </tr>
+                <tr>
+                    <td class="td-31">角色描述：</td>
+                    <td class="td-32">
+                        <input id="txt_roleDescription" name="txt_roleDescription" type="text" value="" maxlength="16">
+                    </td>
+                    <td class="td-33"><s>*</s>角色描述，16字以内</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="fixed-options">
+        <button class="blue" id="btn_save">
+            <i class="icon-Awesome-check"></i>
+            确定
+        </button>
+        <button id="btn_reset">
+            <i class="icon-Awesome-undo"></i>
+            重置
+        </button>
+        <button id="btn_close">
+            <i class="icon-Awesome-close"></i>
+            关闭
+        </button>
+    </div>
+</body>
+</html>
