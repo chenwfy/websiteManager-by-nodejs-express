@@ -1,3 +1,16 @@
+# 安装
+``` 
+$ npm install
+```
+# 运行
+``` 
+$ node webServer.js
+```
+# 默认账号
+``` 
+username:admin
+password:111111
+```
 # 相关文件说明
 ### 主体框架 （framework.js）
 ##### 相关文件及依赖
