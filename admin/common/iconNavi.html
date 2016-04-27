@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 系统图标库</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/sideMenu.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/dist/sideMenu.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var menuData = [
+                { menuName: '字体图标（Awesome）', menuIcon: 'icon-Awesome-fonticons', mainUrl: 'iconView.html?t=0' },
+                { menuName: '字体图标（Ionicons）', menuIcon: 'icon-Awesome-fonticons', mainUrl: 'iconView.html?t=1' },
+                { menuName: '透明图标（PNG 16X16）', menuIcon: 'icon-Awesome-delicious', mainUrl: 'iconView.html?t=2' }
+            ];
+
+            sideMenu.accordion({
+                menuData: menuData, menuRender: $('.levelRoot > ul'), firstSelected: true, menuHandler: function () {
+                    window.top.FWK.MainFrameWindow().location.href = this.mainUrl;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="levelRoot">
+            <ul></ul>
+        </div>
+    </div>
+</body>
+</html>

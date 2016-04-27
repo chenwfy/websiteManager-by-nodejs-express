@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 文件选择器页面</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/common.css" rel="stylesheet">
+    <link href="/assets/css/dist/Icons.css" rel="stylesheet">
+    <link href="/assets/css/dist/fileView.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/lib/webuploader.min.js"></script>
+    <script src="/assets/js/dist/common.js"></script>    
+    <script src="/tools/fileTypeFilter.js"></script>
+    <script src="/assets/js/dist/fileView.js"></script>
+</head>
+<body>
+    <div class="top-navi">
+        <ul>
+            <li class="dir" id="li_dirName"></li>
+            <li class="options">
+                <button class="blue" id="btn_upload">
+                    <i class="icon-Awesome-upload"></i>
+                    上传文件
+                </button>
+                <button id="btn_refresh">
+                    <i class="icon-Awesome-refresh"></i>
+                    刷新目录
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="file-wrapper">
+        <ul id="ul_listWrapper">
+            <li class="loading"></li>
+        </ul>
+    </div>
+
+    <div class="up-layer" id="div_uploaderLayer">
+        <div class="queue-box">
+            <fieldset>
+                <legend>上传队列</legend>
+                <div id="div_queueWrapper"></div>
+            </fieldset>
+        </div>
+        <div class="buttonBox">
+            <div id="fliePicker">
+                <i class="icon-Awesome-plus-circle"></i>
+                选择文件
+            </div>
+            <button class="green" id="btn_startUpload">
+                <i class="icon-Awesome-cloud-upload"></i>
+                开始上传
+            </button>
+            <button class="orange" id="btn_cancelUpload">
+                <i class="icon-Awesome-times-circle"></i>
+                取消上传
+            </button>
+        </div>
+    </div>
+</body>
+</html>
