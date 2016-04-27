@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>管理平台 - 登录</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="/assets/css/dist/login.css" rel="stylesheet">
+    <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
+    <script src="/assets/js/dist/login.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="loginBox">
+            <h1>网站管理平台</h1>
+            <h2>Powered By Node.js + Express</h2>
+            <p id="p_message">请登录</p>
+            <form method="post" action="" id="form_userLogin">
+                <ul>
+                    <li>
+                        <span class="name"></span>
+                        <input type="text" name="txt_userName" id="txt_userName" value="" maxlength="16" placeholder="登录账号">
+                    </li>
+                    <li>
+                        <span class="pwd"></span>
+                        <input type="password" name="pwd_userPassword" id="pwd_userPassword" value="" maxlength="16" placeholder="登录密码">
+                    </li>
+                    <li>
+                        <input type="submit" name="submit" id="btn_submit" value="登录">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <p class="footer">
+        Copyright ©1994-2016 Gwsoft
+        <br>
+        建议使用IE9+、Firefox、Chrome、Edge等新版本浏览器访问本后台
+    </p>
+</body>
+</html>
