@@ -1,16 +1,3 @@
-# 安装
-``` 
-$ npm install
-```
-# 运行
-``` 
-$ node webServer.js
-```
-# 默认账号
-``` 
-username:admin
-password:111111
-```
 # 相关文件说明
 ### 主体框架 （framework.js）
 ##### 相关文件及依赖
@@ -394,7 +381,7 @@ $.Success('操作成功！', {
 ##### 参数说明
 ``` javascript
 {
-    sender：[jQery对象],						//事件发出者（即需要将预览时间绑定至的对象）
+    sender：[jQuery对象],						//事件发出者（即需要将预览时间绑定至的对象）
     picureUrl：[string],						//预览图片的URL（绝对路径）
     ownerWindow：[window对象],					//当前页面的window对象
 }
@@ -440,8 +427,8 @@ grid.load();
 {
     dataLoader: [json],					//数据加载AJAX源设置（url:[string] AJAX请求地址， data:[json] 请求参数）
     tableRenderTo: [string],			//列表TABLE控件写入对象：控件ID，控件JQUERY对象均可
-    rowSelection: [boolean],			//是否可分页（出现分页导航条），默认为TRUE
-    pagerNavigation: [boolean],			//是否可以选择行，默认true
+    rowSelection: [boolean],			//是否可以选择行，默认true
+    pagerNavigation: [boolean],			//是否可分页（出现分页导航条），默认为TRUE
     columns: [array]					//表头及列数据设置
 }
 //更多内容请参考示例页面
