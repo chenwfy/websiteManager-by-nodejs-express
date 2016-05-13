@@ -205,7 +205,7 @@
             var row = null,
                 cell = null;
         
-            _dataRows.length > 0 && _tableOptions.tbody.show() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.removeClass('dis') && _pagerOptions.pageRefreshSender.bind('click', function () {
+            _dataRows.length > 0 && _tableOptions.tbody.show() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.removeClass('dis') && _pagerOptions.pageRefreshSender.one('click', function () {
                 _self.refresh();
             }));
             _dataRows.length < 1 && _tableOptions.tbody.hide() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.addClass('dis') && _pagerOptions.pageRefreshSender.unbind('click'));
