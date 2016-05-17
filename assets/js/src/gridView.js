@@ -197,7 +197,7 @@
             _dataRows = response[_self.dataReader.dataRoot] || [];
             drawTable();
             updatePages(response);
-            fitHeight();
+            _self.pagerNavigation && fitHeight();
             _loadingLayer && _loadingLayer.hide();
         };
 
