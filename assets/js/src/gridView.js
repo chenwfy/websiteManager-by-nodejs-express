@@ -199,6 +199,11 @@
             updatePages(response);
             _self.pagerNavigation && fitHeight();
             _loadingLayer && _loadingLayer.hide();
+            //2016-05-18 修改
+            if (_dataRows.length == 0 && _pagers.recordCount > 0 && _pagers.pageIndex >= _pagers.pageCount) {
+                _pagers.pageIndex > 1 && (_pagers.pageIndex--);
+                loadData();
+            }
         };
 
         var drawTable = function () {
@@ -267,6 +272,9 @@
             _pagers.recordCount = ~~response[_self.dataReader.recordCount] || 0;
             _pagers.pageIndex = ~~response[_self.dataReader.pageIndex] || 1;
             _pagers.pageCount = ~~response[_self.dataReader.pageCount] || 0;
+            _pagers.pageIndex >= _pagers.pageCount && (_pagers.pageIndex = _pagers.pageCount);
+            _pagers.pageIndex < 1 && (_pagers.pageIndex = 1);
+
             if (_self.pagerNavigation && !!_pagerOptions.pagerWrapper) {
                 !!_pagerOptions.recordCountRenderTo && _pagerOptions.recordCountRenderTo.html(_pagers.recordCount);
                 !!_pagerOptions.pageCountRenderTo && _pagerOptions.pageCountRenderTo.html(_pagers.pageCount);
@@ -276,7 +284,10 @@
         };
 
         var updatePagings = function () {
-            if (_pagers.pageCount > 1) {
+            //2016-05-18 修改
+            if (_pagers.pageCount >= 1 && _pagers.recordCount > 0) {
+            //if (_pagers.recordCount > 0) {
+
                 //上一页
                 _pagers.pageIndex <= 1 && $('<a href="javascript:void(0);" title="转至上一页">Prev</a>').appendTo(_pagerOptions.pagerNavRenderTo);
                 _pagers.pageIndex > 1 && $('<a href="javascript:void(0);" title="转至上一页">Prev</a>').one('click', function () { (_pagers.pageIndex--) && loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
@@ -298,7 +309,9 @@
                 }
 
                 //当前页
+                //2016-05-18 修改
                 $('<a href="javascript:void(0)" class="current">' + _pagers.pageIndex + '</a>').appendTo(_pagerOptions.pagerNavRenderTo);
+                //$('<a href="javascript:void(0)" class="current">' + _pagers.pageIndex + '</a>').one('click', function () { loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
 
                 //中间 - 当前页 后面
                 pNumbers = [];

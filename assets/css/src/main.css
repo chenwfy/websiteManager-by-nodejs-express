@@ -450,7 +450,7 @@ button {
                 }
 
 .box-iconWrap {
-    display: none;
+    /*display: none;*/
     position: fixed;
     left: 0;
     top: 41px;
@@ -969,6 +969,7 @@ table {
                 .paging > ul > li.box > a,
                 .paging > ul > li.box > b {
                     display: inline-block;
+                    margin: 0 2px;
                     padding: 0 8px;
                     width: auto;
                     min-width: 12px;

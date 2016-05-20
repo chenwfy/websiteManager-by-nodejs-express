@@ -55,8 +55,10 @@
             });
 
             window.setTimeout(function () {
-                wrappers.eq(0).show();
                 controllers.eq(0).addClass('active');
+                //wrappers.eq(0).show();
+                var first = wrappers.eq(0);
+                wrappers.not(first).hide();
             }, 100);
         });
     </script>
