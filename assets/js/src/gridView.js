@@ -35,6 +35,12 @@
             _rowSelected = {},
             _dataRows = [];
 
+        //绘制表格
+        this.drawTable = function () {
+            init();
+            _self.pagerNavigation && fitHeight();
+        };
+
         //加载数据
         this.load = function () {
             init();

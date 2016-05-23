@@ -12,32 +12,65 @@
     <link href="/assets/css/dist/Icons.css" rel="stylesheet">
     <script src="/assets/js/lib/jquery-2.2.0.min.js"></script>
     <script src="/assets/js/dist/common.js"></script>
+    <script src="/assets/js/lib/autosize.js"></script>
+    <script src="/assets/js/dist/gridView.js"></script>
     <style type="text/css">
         h1 {
-            height: 36px; 
-            line-height: 36px; 
-            padding-left: 10px; 
-            text-align:left; 
-            color: #666; 
-            font-size: 16px; 
+            height: 36px;
+            line-height: 36px;
+            padding-left: 10px;
+            text-align: left;
+            color: #333;
+            font-size: 16px;
             font-weight: 600;
         }
 
         p {
-            height: auto; 
-            line-height: 30px; 
-            padding-left: 10px; 
-            text-align: left; 
-            color: #787878; 
-            font-size: 14px; 
+            height: auto;
+            line-height: 30px;
+            padding-left: 10px;
+            text-align: left;
+            color: #787878;
+            font-size: 14px;
             font-weight: normal;
         }
 
-        p > label {
-            color: #666;
-            font-weight: 600;
-        }
+            p > label {
+                color: #666;
+                font-weight: 600;
+            }
+
+            p > code {
+                display: block;
+                background-color: #f4f4f4;
+                padding: 16px;
+                text-align: left;
+                color: #787878;
+            }
+
+                p > code > i {
+                    color: #044f26;
+                    margin-left: 160px;
+                }
+
+            p > textarea {
+                padding: 4px;
+                height: auto;
+                max-height: 240px;
+                background-color: #f7f7f7;
+                overflow-y: visible;
+                text-align: left;
+                line-height: 24px;
+                color: #333;
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
     </style>
+    <script type="text/javascript">
+        $(function () {
+            autosize(document.querySelectorAll('textarea'));
+        });
+    </script>
 </head>
 <body>
     <div class="main-nav ">
@@ -48,9 +81,59 @@
             </li>
         </ul>
     </div>
-    
     <div class="wrap">
-        <h1>直接找个有列表的页面，查看源代码吧。这个相对比较简单</h1>
+        <h1>示例:</h1>        
+        <p>
+            <textarea id="txt_jsCode_example_1">
+var listOptions = {
+        dataLoader: { url: '/service/coreMenu/getMenuList', data: { parentId: 1 } },
+        tableRenderTo: 'tableList',
+        rowSelection: true,
+        columns: [
+            { columnName: '编号', dataIndex: 'menuId', className: 'th5' },
+            { columnName: '名称', dataIndex: 'menuName', className: 'th10' },
+            { columnName: '图标', dataIndex: 'menuIcon', className: 'th10', render: function () { return this ? '<i class="' + this + '"></i>' : ''; } },
+            { columnName: '左侧地址', dataIndex: 'leftPage', className: 'th20' },
+            { columnName: '右侧地址', dataIndex: 'rightPage', className: 'th20' },
+            { columnName: '排序码', dataIndex: 'sort', className: 'th10', render: '<input type="text" value="{sort}" name="txt_menuOrder_{menuId}" id="txt_menuOrder_{menuId}" style="width:80px;">' },
+            { columnName: '状态', dataIndex: 'status', className: 'th10', render: { '1': '<span class="sp12 spYes" title="可用"></span>', '0': '<span class="sp12 spNo" title="不可用"></span>' } },
+            { columnName: '操作', dataIndex: 'menuId', className: 'th10', render: '<a href="javascript:void(0);" class="op" onclick="javascript: void (0);"><i class="icon-Awesome-pencil"></i>修改</a><a href="javascript:void(0);" class="op" onclick="javascript: void (0);"><i class="icon-Awesome-remove"></i>删除</a>' }
+        ]
+    },
+    grid = null;</textarea>
+            <br>
+            <button id="btn_run_example_1" class="blue" style="position: relative; top: 2px;">绘制表格</button>
+            <button id="btn_run_example_2" class="blue" style="position: relative; top: 2px;">加载列表</button>
+            <button id="btn_run_example_3" class="blue" style="position: relative; top: 2px;">直接加载列表（同步绘制表格）</button>
+            <script type="text/javascript">
+                var jsCode = $('#txt_jsCode_example_1').val();
+                eval(jsCode);
+
+                $('#btn_run_example_1').on('click', function () {
+                    $('#tableList').children().remove();
+                    $('.paging').remove();
+
+                    grid = new gridView(listOptions);
+                    grid.drawTable();
+                });
+
+                $('#btn_run_example_2').on('click', function () {
+                    if ($('#tableList').find('table').length > 0)
+                        grid.load();
+                    else
+                        alert('请先点击“绘制表格”按钮！');
+                });
+
+                $('#btn_run_example_3').on('click', function () {
+                    $('#tableList').children().remove();
+                    $('.paging').remove();
+                    grid = new gridView(listOptions);
+                    grid.load();
+                });
+            </script>
+        </p>
     </div>
+    
+    <div class="wrap" id="tableList"></div>
 </body>
 </html>
