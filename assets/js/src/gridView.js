@@ -295,8 +295,8 @@
             //if (_pagers.recordCount > 0) {
 
                 //上一页
-                _pagers.pageIndex <= 1 && $('<a href="javascript:void(0);" title="转至上一页">Prev</a>').appendTo(_pagerOptions.pagerNavRenderTo);
-                _pagers.pageIndex > 1 && $('<a href="javascript:void(0);" title="转至上一页">Prev</a>').one('click', function () { (_pagers.pageIndex--) && loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
+                _pagers.pageIndex <= 1 && $('<a href="javascript:void(0);" title="转至上一页">上一页</a>').appendTo(_pagerOptions.pagerNavRenderTo);
+                _pagers.pageIndex > 1 && $('<a href="javascript:void(0);" title="转至上一页">上一页</a>').one('click', function () { (_pagers.pageIndex--) && loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
 
                 //中间 - 当前页 前面
                 var pNumbers = [];
@@ -336,8 +336,8 @@
                 }
 
                 //下一页
-                _pagers.pageIndex >= _pagers.pageCount && $('<a href="javascript:void(0);" title="转至下一页">Next</a>').appendTo(_pagerOptions.pagerNavRenderTo);
-                _pagers.pageIndex < _pagers.pageCount && $('<a href="javascript:void(0);" title="转至下一页">Next</a>').one('click', function () { (_pagers.pageIndex++) && loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
+                _pagers.pageIndex >= _pagers.pageCount && $('<a href="javascript:void(0);" title="转至下一页">下一页</a>').appendTo(_pagerOptions.pagerNavRenderTo);
+                _pagers.pageIndex < _pagers.pageCount && $('<a href="javascript:void(0);" title="转至下一页">下一页</a>').one('click', function () { (_pagers.pageIndex++) && loadData(); }).appendTo(_pagerOptions.pagerNavRenderTo);
             }
         };
 
