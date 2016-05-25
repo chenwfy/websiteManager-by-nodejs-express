@@ -476,27 +476,27 @@ button {
             width: 16px;
             height: 16px;
             font-size: 16px;
-             color: #787878;
+            color: #787878;
         }
 
         .box-iconWrap > a:hover {
             border-color: #ef705b;
         }
 
-        .box-iconWrap > a:hover,
-        .box-iconWrap > a:hover > i {
-            color: #ef705b;
-            font-size: 16px;
-        }
-
-            .box-iconWrap > a:hover > i[class^="icon-Ionicons-"],
-            .box-iconWrap > a:hover > i[class^=" icon-Ionicons-"],
-            .box-iconWrap > a:hover > i[class^="icon-Awesome-"],
-            .box-iconWrap > a:hover > i[class^=" icon-Awesome-"] {
-                width: 32px;
-                height: 32px;
-                font-size: 32px;
+            .box-iconWrap > a:hover,
+            .box-iconWrap > a:hover > i {
+                color: #ef705b;
+                font-size: 16px;
             }
+
+                .box-iconWrap > a:hover > i[class^="icon-Ionicons-"],
+                .box-iconWrap > a:hover > i[class^=" icon-Ionicons-"],
+                .box-iconWrap > a:hover > i[class^="icon-Awesome-"],
+                .box-iconWrap > a:hover > i[class^=" icon-Awesome-"] {
+                    width: 32px;
+                    height: 32px;
+                    font-size: 32px;
+                }
 
 /* 表格 */
 table {
@@ -877,14 +877,93 @@ table {
                                 color: #ef705b;
                             }
 
-/*table.listTable > tbody > tr > td a.op-blue {
-                        color: #389ebc;
+                    table.listTable > tbody > tr > td a.op-blue,
+                    table.listTable > tbody > tr > td a.op-orange,
+                    table.listTable > tbody > tr > td a.op-green {
+                        -webkit-transition: none;
+                        -moz-transition: none;
+                        -o-transition: none;
+                        transition: none;
+                        color: #ffffff;
+                    }
+
+                        table.listTable > tbody > tr > td a.op-blue:hover,
+                        table.listTable > tbody > tr > td a.op-blue:active,
+                        table.listTable > tbody > tr > td a.op-orange:hover,
+                        table.listTable > tbody > tr > td a.op-orange:active,
+                        table.listTable > tbody > tr > td a.op-green:hover,
+                        table.listTable > tbody > tr > td a.op-green:active {
+                            color: #ffffff;
+                        }
+
+                            table.listTable > tbody > tr > td a.op-blue > i,
+                            table.listTable > tbody > tr > td a.op-blue:hover > i,
+                            table.listTable > tbody > tr > td a.op-blue:active > i,
+                            table.listTable > tbody > tr > td a.op-orange > i,
+                            table.listTable > tbody > tr > td a.op-orange:hover > i,
+                            table.listTable > tbody > tr > td a.op-orange:active > i,
+                            table.listTable > tbody > tr > td a.op-green > i,
+                            table.listTable > tbody > tr > td a.op-green:hover > i,
+                            table.listTable > tbody > tr > td a.op-green:active > i {
+                                color: #ffffff;
+                            }
+
+                    table.listTable > tbody > tr > td a.op-blue {
+                        background: -moz-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#53b8d6), color-stop(100%,#389ebc));
+                        background: -webkit-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                        background: -o-linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
+                        background: linear-gradient(center top, #53b8d6 0%, #389ebc 100%);
                         border-color: #389ebc;
                     }
 
-                        table.listTable > tbody > tr > td a.op-blue > i {
-                            color: #389ebc;
-                        }*/
+                        table.listTable > tbody > tr > td a.op-blue:hover {
+                            background: #389ebc;
+                            border-color: #389ebc;
+                        }
+
+                        table.listTable > tbody > tr > td a.op-blue:active {
+                            background: #46abc9;
+                            border-color: #389ebc;
+                        }
+
+                    table.listTable > tbody > tr > td a.op-orange {
+                        background: -moz-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#d65f4d), color-stop(100%,#c05343));
+                        background: -webkit-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                        background: -o-linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                        background: linear-gradient(center top, #d65f4d 0%, #c05343 100%);
+                        border-color: #c05343;
+                    }
+
+                        table.listTable > tbody > tr > td a.op-orange:hover {
+                            background: #c05343;
+                            border-color: #c05343;
+                        }
+
+                        table.listTable > tbody > tr > td a.op-orange:active {
+                            background: #cc5949;
+                            border-color: #c05343;
+                        }
+
+                    table.listTable > tbody > tr > td a.op-green {
+                        background: -moz-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#69b076), color-stop(100%,#4ca15b));
+                        background: -webkit-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: -o-linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        background: linear-gradient(center top, #69b076 0%, #4ca15b 100%);
+                        border-color: #4ca15b;
+                    }
+
+                        table.listTable > tbody > tr > td a.op-green:hover {
+                            background: #4ca15b;
+                            border-color: #4ca15b;
+                        }
+
+                        table.listTable > tbody > tr > td a.op-green:active {
+                            background: #51a351;
+                            border-color: #4ca15b;
+                        }
 
 /* 列表分页-页码容器 */
 .paging {

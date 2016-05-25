@@ -7,7 +7,7 @@
 /* 整体结构 */
 html,
 body {
-    min-width: 1280px;
+    /*min-width: 1280px;*/
 }
 
 .header,
@@ -49,7 +49,7 @@ body {
     display: inline-block;
     width: 250px;
     height: 100%;
-    background: url(/assets/images/logos/logo.png) no-repeat 16px center;
+    background: url(/assets/images/logos/logo.png) no-repeat 8px center;
 }
 
 .header > ul {
@@ -404,13 +404,14 @@ body {
 
 .wrapper > .content {
     height: 100%;
+    /*min-width: 800px;*/
     margin-left: 252px;
     border-left: 1px #c7c7c7 solid;
     position: relative;
 }
 
     .wrapper > .content > ul {
-        height: 31px;
+        min-height: 31px;
         background: -moz-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
         background: -webkit-gradient(linear, center top, center bottom, color-stop(0%,#ffffff), color-stop(100%,#f0f0f0));
         background: -webkit-linear-gradient(center top, #ffffff 0%, #f0f0f0 100%);
@@ -532,13 +533,13 @@ body {
         left: 0;
         top: 32px;
         right: 0;
-        bottom: 0;
+        bottom: 0;        
     }
 
         .wrapper > .content > .container > .mainFrameRender {
             display: none;
             width: 100%;
-            height: 100%;
+            height: 100%;            
         }
 
             .wrapper > .sidebar > .container > .sideFrameRender > iframe,
@@ -550,7 +551,7 @@ body {
             }
 
 /* 屏幕宽度适配 */
-@media all and (max-width: 1280px) {
+/*@media all and (max-width: 1280px) {
     .header > a.logo {
         display: none;
     }
@@ -569,4 +570,4 @@ body {
         margin-left: 0;
         border-left: none;
     }
-}
+}*/
