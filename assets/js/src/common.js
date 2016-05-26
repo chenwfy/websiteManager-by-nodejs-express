@@ -704,7 +704,7 @@
             ownerWindow = ownerWindow || window;
             var pictures = [], tmpUrl;
             typeof picureUrl === 'string' && (pictures = [picureUrl]);
-            typeof picureUrl === 'object' && source instanceof Array && (pictures = picureUrl);
+            typeof picureUrl === 'object' && pictures instanceof Array && (pictures = picureUrl);
 
             this.each(function (idx, el) {
                 (function (idx, el) {

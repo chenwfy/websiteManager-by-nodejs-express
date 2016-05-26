@@ -216,10 +216,10 @@
             var row = null,
                 cell = null;
         
-            _dataRows.length > 0 && _tableOptions.tbody.show() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.removeClass('dis') && _pagerOptions.pageRefreshSender.one('click', function () {
+            _dataRows.length > 0 && _tableOptions.tbody.show() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.removeClass('dis') && _pagerOptions.pageRefreshSender.off('click') && _pagerOptions.pageRefreshSender.one('click', function () {
                 _self.refresh();
             }));
-            _dataRows.length < 1 && _tableOptions.tbody.hide() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.addClass('dis') && _pagerOptions.pageRefreshSender.unbind('click'));
+            _dataRows.length < 1 && _tableOptions.tbody.hide() && (_pagerOptions.pageRefreshSender && _pagerOptions.pageRefreshSender.addClass('dis') && _pagerOptions.pageRefreshSender.off('click'));
 
             $.each(_dataRows, function (index, data) {
                 row = $('<tr>').on('click', function () {

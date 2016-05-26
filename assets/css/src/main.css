@@ -654,6 +654,15 @@ table {
                     text-decoration: none;
                 }
 
+                table.formTable > tbody > tr > td img {
+                    width: auto;
+                    height: auto;
+                    max-width: 24px;
+                    max-height: 24px;
+                    margin-right: 8px;
+                    vertical-align: middle;
+                }
+
     /* 列表TABLE */
     table.listTable {
         background-color: #ddd;
@@ -808,8 +817,10 @@ table {
                     }
 
                     table.listTable > tbody > tr > td img {
-                        width: 24px;
-                        height: 24px;
+                        width: auto;
+                        height: auto;
+                        max-width: 24px;
+                        max-height: 24px;
                         margin-right: 8px;
                         vertical-align: middle;
                     }
